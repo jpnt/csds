@@ -3,22 +3,22 @@
 #include <stdlib.h>
 
 Vec* vec_create(size_t capacity) {
-	Vec* v = (Vec*) malloc(sizeof(Vec));
-	if (v == NULL) {
+	Vec* vec = (Vec*) malloc(sizeof(Vec));
+	if (vec == NULL) {
 		perror("Error allocating memory for vector");
 		exit(EXIT_FAILURE);
 	}
 
-	v->items = (void**) calloc(capacity, sizeof(void*));
-	if (v->items == NULL) {
+	vec->items = (void**) calloc(capacity, sizeof(void*));
+	if (vec->items == NULL) {
 		perror("Error allocating memory for items array");
-		free(v);
+		free(vec);
 		exit(EXIT_FAILURE);
 	}
 
-	v->size = 0;
-	v->capacity = capacity;
-	return v;
+	vec->size = 0;
+	vec->capacity = capacity;
+	return vec;
 }
 
 void vec_destroy(Vec* vec) {
@@ -58,7 +58,15 @@ void* vec_remove(Vec* vec, size_t item_idx) {
 	void* removed = vec->items[item_idx];
 	vec->items[item_idx] = NULL;
 
-	for (size_t i = item_idx; i < vec->capacity; i++) {
+	// Move items left after removing
+	size_t i;
+	size_t capacity = vec->capacity;
+	size_t limit = capacity - 1;
+	for (i = item_idx; i < limit; i+=2) {
+		vec->items[i] = vec->items[i+1];
+		vec->items[i+1] = vec->items[i+2];
+	}
+	for (; i < capacity; i++) {
 		vec->items[i] = vec->items[i+1];
 	}
 

@@ -12,6 +12,7 @@
 *.userosscache
 *.suo
 *.sln.docstates
+*.ignore
 
 # Ignore Visual Studio Code settings
 .vscode/
