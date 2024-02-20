@@ -13,20 +13,20 @@ library aims to serve as a solid foundation for building various applications.
 - [x] **Vec** (Dynamic Array)
   - Can be used as a stack or a queue.
 
-- [] **Deque** (Double Ended Queue)
+- [ ] **Deque** (Double Ended Queue)
   - Utilizes Vec for implementation.
 
-- [] **LList** (Doubly Linked List)
+- [ ] **LList** (Doubly Linked List)
 
 ### Maps:
 
-- [] **HMap** (Hash Table)
+- [ ] **HMap** (Hash Table)
 
-- [] **BTreeMap** (Balanced Binary Search Tree)
+- [ ] **BTreeMap** (Balanced Binary Search Tree)
 
 ### Miscellaneous:
 
-- [] **BHeap** (Binary Heap)
+- [ ] **BHeap** (Binary Heap)
   - Suitable for implementing a Priority Queue.
 
 ## Non-Goals
