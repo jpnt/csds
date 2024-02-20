@@ -20,7 +20,7 @@ MAIN_EXE = $(BUILD_DIR)/main.out
 
 .PHONY: all clean test
 
-all: $(MAIN_EXE)
+all: $(BUILD_DIR) $(MAIN_EXE)
 
 $(MAIN_EXE): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
@@ -36,4 +36,4 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)/tests
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rfv $(BUILD_DIR)
