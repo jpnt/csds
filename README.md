@@ -11,7 +11,7 @@ library aims to serve as a solid foundation for building various applications.
 ### Sequences:
 
 - [x] **Vec** (Dynamic Array)
-  - Can be used as a stack or a queue.
+  - Can also be used as a stack or a queue.
 
 - [ ] **Deque** (Double Ended Queue)
   - Utilizes Vec for implementation.
