@@ -13,7 +13,7 @@ library aims to serve as a solid foundation for building various applications.
 - [x] **Vec** (Dynamic Array)
   - Can also be used as a stack or a queue.
 
-- [ ] **LList** (Doubly Linked List)
+- [ ] **DLList** (Doubly Linked List)
 
 ### Maps:
 
