@@ -182,9 +182,9 @@ Node* dllist_push_front(DLList* dll, void* data) {
 	return new_node;
 }
 
-void dllist_remove(DLList* dll, Node* node) {
+void* dllist_remove(DLList* dll, Node* node) {
 	if (dll == NULL || node == NULL) {
-		return;
+		return NULL;
 	}
 
 	if (dll->head == node) {
@@ -203,6 +203,11 @@ void dllist_remove(DLList* dll, Node* node) {
 		node->next->prev = node->prev;
 	}
 
+	void* data = node->data;
+
 	node_destroy(node);
+
 	dll->size-=1;
+
+	return data;
 }

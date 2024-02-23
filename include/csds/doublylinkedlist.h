@@ -22,6 +22,6 @@ Node* dllist_insert_at_tail(DLList* dll, Node* node);
 Node* dllist_push_back(DLList* dll, void* data);
 Node* dllist_push_front(DLList* dll, void* data);
 
-void dllist_remove(DLList* dll, Node* node);
+void* dllist_remove(DLList* dll, Node* node);
 
 #endif // !CSDS_DOUBLYLINKEDLIST_H
