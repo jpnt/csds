@@ -20,19 +20,16 @@ MAIN_EXE = $(BUILD_DIR)/main.out
 
 .PHONY: all clean test
 
-all: $(BUILD_DIR) $(MAIN_EXE)
-
-$(MAIN_EXE): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+all: $(BUILD_DIR) $(OBJS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 test: $(BUILD_DIR) $(OBJS) $(TEST_OBJS)
-	$(foreach test_src,$(TEST_SRCS), $(CC) $(CFLAGS) $(OBJS) $(test_src) -o $(BUILD_DIR)/tests/$(notdir $(test_src:.c=)) && ./$(BUILD_DIR)/tests/$(notdir $(test_src:.c=));)
+	$(foreach test_src,$(TEST_SRCS), $(CC) $(CFLAGS) $(OBJS) $(test_src) -o \
+		$(BUILD_DIR)/tests/$(notdir $(test_src:.c=)) && ./$(BUILD_DIR)/tests/$(notdir $(test_src:.c=));)
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
 	mkdir -p $(BUILD_DIR)/tests
 
 clean:
