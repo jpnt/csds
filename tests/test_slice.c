@@ -1,5 +1,7 @@
 #include "../include/csds/slice.h"
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 	int array[7] = {1,2,3,4,5,6,7};
@@ -7,6 +9,11 @@ int main() {
 	// Slice in the heap
 
 	Slice* slice = slice_create(array, sizeof(int), 1, 5);
+	if (slice == NULL) {
+		perror("slice_create");
+		exit(1);
+	}
+
 	int len = slice->len;
 	assert(len == 5);
 	
@@ -28,7 +35,12 @@ int main() {
 	// And a slice in the stack
 	
 	Slice stk_sl;
-	slice_stack_create(&stk_sl, array, sizeof(int), 3, 6);
+	int ret = slice_stack_create(&stk_sl, array, sizeof(int), 3, 6);
+	if (ret == -1) {
+		perror("slice_stack_create");
+		exit(2);
+	}
+
 	len = stk_sl.len;
 	assert(len == 4);
 
