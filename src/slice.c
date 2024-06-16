@@ -30,6 +30,27 @@ Slice* slice_create(void* ptr, size_t type_size, size_t start_idx, size_t end_id
 	return slice;
 }
 
+int slice_stack_create(Slice* slice, void* ptr, size_t type_size, size_t start_idx, size_t end_idx) {
+	if (ptr == NULL) {
+		return -1;
+	}
+
+	if (type_size < 1) {
+		return -1;
+	}
+
+	if (end_idx < start_idx) {
+		return -1;
+	}
+
+	slice->ptr = ptr + start_idx * type_size;
+	slice->type_size = type_size;
+	end_idx+=1;
+	slice->len = end_idx - start_idx;
+
+	return 0;
+}
+
 void slice_destroy(Slice* slice) {
 	if (slice == NULL) {
 		return;
