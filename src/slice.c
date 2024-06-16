@@ -40,8 +40,7 @@ void slice_destroy(Slice* slice) {
 
 void* slice_valueat(Slice* slice, size_t idx) {
 	if (idx >= slice->len) {
-		perror("slice_valueat: invalid argument: slice length is smaller than index provided");
-		exit(EXIT_FAILURE);
+		return NULL;
 	}
 
 	return slice->ptr + idx * slice->type_size;
