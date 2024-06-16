@@ -60,8 +60,9 @@ void slice_destroy(Slice* slice) {
 }
 
 void* slice_valueat(Slice* slice, size_t idx) {
+	// Handle if out of bounds
 	if (idx >= slice->len) {
-		return NULL;
+		return slice->ptr + (slice->len - 1) * slice->type_size;
 	}
 
 	return slice->ptr + idx * slice->type_size;
