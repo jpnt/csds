@@ -2,7 +2,7 @@
 
 ## Overview
 
-**csds** is a C library focused on providing simple, robust implementations of 
+**csds** is a C99 library focused on providing simple implementations of basic and
 fundamental data structures. Designed with clarity and ease of use in mind, this
 library aims to serve as a solid foundation for building various applications.
 
@@ -32,13 +32,20 @@ library aims to serve as a solid foundation for building various applications.
 
 - No "get" funtions
 
+- No "set" functions
+
+- No support for niche features
+
 ## Goals
 
-- **Robust:**
+- **Stable:**
   - Provide a solid base for building applications with confidence.
 
 - **Simple:**
   - Do few things and do them well, prioritizing ease of understanding and usage.
+
+- **Extensible:**
+  - Contain only the barebones in order for the user to easily integrate and modify.
 
 ## Contributions
 
