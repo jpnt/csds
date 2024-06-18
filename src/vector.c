@@ -58,7 +58,7 @@ void* vec_remove(Vec* vec, size_t item_idx) {
 	void* removed = vec->items[item_idx];
 	vec->items[item_idx] = NULL;
 
-	// Move items left after removing
+	/* Move items left after removing */
 	size_t i;
 	size_t capacity = vec->capacity;
 	size_t limit = capacity - 1;

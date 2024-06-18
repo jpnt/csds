@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 Slice* slice_create(void* ptr, size_t type_size, size_t start_idx, size_t end_idx) {
-	// Invalid arguments
+	/* Invalid arguments */
 	if (ptr == NULL) {
 		return NULL;
 	}
@@ -60,7 +60,7 @@ void slice_destroy(Slice* slice) {
 }
 
 void* slice_valueat(Slice* slice, size_t idx) {
-	// Handle if out of bounds
+	/* Handle if out of bounds */
 	if (idx >= slice->len) {
 		return slice->ptr + (slice->len - 1) * slice->type_size;
 	}

@@ -33,7 +33,7 @@ void list_destroy(List* list) {
 }
 
 Node* list_insert_after(List* list, Node* node, Node* new_node) {
-	// Invalid arguments
+	/* Invalid arguments */
 	if (list == NULL || new_node == NULL) {
 		return NULL;
 	}
@@ -43,17 +43,17 @@ Node* list_insert_after(List* list, Node* node, Node* new_node) {
 		return new_node;
 	}
 
-	// Update links
+	/* Update links */
 	new_node->prev = node;
 	new_node->next = node->next;
 
-	// Update links for adjacent nodes
+	/* Update links for adjacent nodes */
 	if (node->next != NULL) {
 		node->next->prev = new_node;
 	}
 	node->next = new_node;
 
-	// Update tail if necessary
+	/* Update tail if necessary */
 	if (node == list->tail) {
 		list->tail = new_node;
 	}
@@ -64,7 +64,7 @@ Node* list_insert_after(List* list, Node* node, Node* new_node) {
 }
 
 Node* list_insert_before(List* list, Node* node, Node* new_node) {
-	// Invalid arguments
+	/* Invalid arguments */
 	if (list == NULL || new_node == NULL) {
 		return NULL;
 	}
@@ -74,17 +74,17 @@ Node* list_insert_before(List* list, Node* node, Node* new_node) {
 		return new_node;
 	}
 
-	// Update links
+	/* Update links */
 	new_node->next = node;
 	new_node->prev = node->prev;
 
-	// Update links for adjacent nodes
+	/* Update links for adjacent nodes */
 	if (node->prev != NULL) {
 		node->prev->next = new_node;
 	}
 	node->prev = new_node;
 
-	// Update head if necessary
+	/* Update head if necessary */
 	if (node == list->head) {
 		list->head = new_node;
 	}

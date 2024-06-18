@@ -16,5 +16,10 @@ Node* node_create(void* data, Node* next, Node* prev) {
 }
 
 void node_destroy(Node* node) {
+	if (node == NULL) {
+		return;
+	}
+
+	/* free(node->data); */
 	free(node);
 }
