@@ -12,7 +12,7 @@ int main() {
 	vec_push(vec, (void*)0x2);
 	vec_push(vec, (void*)0x3);
 	vec_push(vec, (void*)0x4);
-	assert(vec->size == 4);
+	assert(vec->len == 4);
 
 	assert(vec->items[0] == (void*)0x1);
 	assert(vec->items[1] == (void*)0x2);
@@ -24,7 +24,7 @@ int main() {
 	assert(vec_pop(vec) == (void*)0x2);
 	assert(vec_pop(vec) == (void*)0x1);
 
-	assert(vec->size == 0);
+	assert(vec->len == 0);
 
 
 	// Use as a queue

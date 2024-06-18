@@ -16,7 +16,7 @@ Vec* vec_create(size_t capacity) {
 		exit(EXIT_FAILURE);
 	}
 
-	vec->size = 0;
+	vec->len = 0;
 	vec->capacity = capacity;
 	return vec;
 }
@@ -47,7 +47,7 @@ void vec_insert(Vec* vec, size_t item_idx, void* item) {
 
 	vec->items[item_idx] = item;
 
-	vec->size++;
+	vec->len++;
 }
 
 void* vec_remove(Vec* vec, size_t item_idx) {
@@ -70,28 +70,28 @@ void* vec_remove(Vec* vec, size_t item_idx) {
 		vec->items[i] = vec->items[i+1];
 	}
 
-	vec->size--;
+	vec->len--;
 
 	return removed;
 }
 
 void vec_push(Vec* vec, void* item) {
-	while (vec->size >= vec->capacity) {
+	while (vec->len >= vec->capacity) {
 		vec_grow(vec);
 	}
 
-	vec->items[vec->size] = item;
-	vec->size+=1;
+	vec->items[vec->len] = item;
+	vec->len+=1;
 }
 
 void* vec_pop(Vec* vec) {
-	if (vec->size == 0) {
+	if (vec->len == 0) {
 		return NULL;
 	}
 
-	void* popped = vec->items[vec->size-1];
-	vec->items[vec->size-1] = NULL;
-	vec->size-=1;
+	void* popped = vec->items[vec->len-1];
+	vec->items[vec->len-1] = NULL;
+	vec->len-=1;
 
 	return popped;
 }

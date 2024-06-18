@@ -5,7 +5,7 @@
 
 typedef struct {
 	void** items;
-	size_t size;
+	size_t len;
 	size_t capacity;
 } Vec;
 
