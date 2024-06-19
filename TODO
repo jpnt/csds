@@ -1,0 +1,6 @@
+TODO
+
+* ISO c90 full support
+* HashMap implementation
+* BtreeMap
+* MemDebug, test with other allocators

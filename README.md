@@ -2,7 +2,7 @@
 
 ## Overview
 
-**csds** is a C99 library focused on providing simple implementations of basic and
+**csds** is a ISO C90 library focused on providing simple implementations of basic and
 fundamental data structures. Designed with clarity and ease of use in mind, this
 library aims to serve as a solid foundation for building various applications.
 
@@ -56,7 +56,10 @@ library aims to serve as a solid foundation for building various applications.
   - Do few things and do them well, prioritizing ease of understanding and usage.
 
 - **Extensible:**
-  - Contain only the barebones in order for the user to easily integrate and modify.
+  - Contain only the barebones in order to easily integrate and modify when needed.
+
+- **Portable:**
+  - Avoid libraries and use old standard to prioritize portability accross multiple systems.
 
 ## Contributions
 
