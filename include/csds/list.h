@@ -1,27 +1,32 @@
 #ifndef CSDS_LIST_H
 #define CSDS_LIST_H
 
-#include "node.h"
+#include "listnode.h"
 #include <stddef.h>
 
 typedef struct {
-	struct Node* head;
-	struct Node* tail;
-	size_t size;
+	struct ListNode* head; /* pointer to the first node */
+	struct ListNode* tail; /* pointer to the last node */
+	size_t len; /* number of nodes in the list */
 } List;
 
-List* list_create();
-void list_destroy(List* list);
-
-Node* list_insert_after(List* list, Node* node, Node* new_node);
-Node* list_insert_before(List* list, Node* node, Node* new_node);
-
-Node* list_insert_at_head(List* list, Node* node);
-Node* list_insert_at_tail(List* list, Node* node);
-
-Node* list_push_back(List* list, void* data);
-Node* list_push_front(List* list, void* data);
-
-void* list_remove(List* list, Node* node);
+/* allocates memory in the heap for the linked list */
+extern List* list_create();
+/* frees linked list memory and optioonal node data */
+extern void list_destroy(List* list);
+/* inserts a new node after the specified node */
+extern ListNode* list_insert_after(List* list, ListNode* node, ListNode* new_node);
+/* inserts a new node before the specified node */
+extern ListNode* list_insert_before(List* list, ListNode* node, ListNode* new_node);
+/* inserts a new node at the head of the list */
+extern ListNode* list_insert_at_head(List* list, ListNode* node);
+/* inserts a new node at the tail of the list */
+extern ListNode* list_insert_at_tail(List* list, ListNode* node);
+/* creates a new node from data and inserts it at tail */
+extern ListNode* list_push_back(List* list, __L_DATA_TYPE data);
+/* creates a new node from data and inserts it at head */
+extern ListNode* list_push_front(List* list, __L_DATA_TYPE data);
+/* removes a node from the list and returns it */
+extern __L_DATA_TYPE list_remove(List* list, ListNode* node);
 
 #endif // !CSDS_LIST_H

@@ -4,14 +4,18 @@
 #include <stddef.h>
 
 typedef struct {
-	void* ptr;
-	size_t type_size;
-	size_t len;
+	void* addr; /* pointer without a type, simply an address */
+	size_t type_size; /* sizeof(some_type), in order to do pointer arithmetic */
+	size_t len; /* length of the slice to prevent out of bounds errors */
 } Slice;
 
-Slice* slice_create(void* ptr, size_t type_size, size_t start, size_t end);
-int slice_stack_create(Slice* slice, void* ptr, size_t type_size, size_t start, size_t end);
-void slice_destroy(Slice* slice);
-void* slice_valueat(Slice* slice, size_t idx);
+/* allocates a new slice */
+extern Slice* slice_create(void* addr, size_t type_size, size_t start, size_t end);
+/* sets a slice on the stack memory */
+extern int slice_create_using_stack(Slice* slice, void* addr, size_t type_size, size_t start, size_t end);
+/* frees memory allocated for the slice */
+extern void slice_destroy(Slice* slice);
+/* returns the value at the specified index in the slice */
+extern void* slice_valueat(Slice* slice, size_t idx);
 
 #endif // !CSDS_SLICE_H

@@ -35,9 +35,9 @@ int main() {
 	// And a slice in the stack
 	
 	Slice stk_sl;
-	int ret = slice_stack_create(&stk_sl, array, sizeof(int), 3, 6);
+	int ret = slice_create_using_stack(&stk_sl, array, sizeof(int), 3, 6);
 	if (ret == -1) {
-		perror("slice_stack_create");
+		perror("slice_create_using_stack");
 		exit(2);
 	}
 

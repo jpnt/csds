@@ -1,9 +1,9 @@
-#include "../include/csds/node.h"
+#include "../include/csds/listnode.h"
 #include <stddef.h>
 #include <stdlib.h>
 
-Node* node_create(void* data, Node* next, Node* prev) {
-	Node* new_node = (Node*) malloc(sizeof(Node));
+ListNode* node_create(__L_DATA_TYPE data, ListNode* next, ListNode* prev) {
+	ListNode* new_node = (ListNode*) malloc(sizeof(ListNode));
 	if (new_node == NULL) {
 		return NULL;
 	}
@@ -15,7 +15,7 @@ Node* node_create(void* data, Node* next, Node* prev) {
 	return new_node;
 }
 
-void node_destroy(Node* node) {
+void node_destroy(ListNode* node) {
 	if (node == NULL) {
 		return;
 	}

@@ -10,7 +10,7 @@ List* list_create() {
 	}
 	list->head = NULL;
 	list->tail = NULL;
-	list->size = 0;
+	list->len = 0;
 
 	return list;
 }
@@ -20,8 +20,8 @@ void list_destroy(List* list) {
 		return;
 	}
 
-	Node* current = list->head;
-	Node* next;
+	ListNode* current = list->head;
+	ListNode* next;
 
 	while (current != NULL) {
 		next = current->next;
@@ -32,7 +32,7 @@ void list_destroy(List* list) {
 	free(list);
 }
 
-Node* list_insert_after(List* list, Node* node, Node* new_node) {
+ListNode* list_insert_after(List* list, ListNode* node, ListNode* new_node) {
 	/* Invalid arguments */
 	if (list == NULL || new_node == NULL) {
 		return NULL;
@@ -58,12 +58,12 @@ Node* list_insert_after(List* list, Node* node, Node* new_node) {
 		list->tail = new_node;
 	}
 
-	list->size+=1;
+	list->len+=1;
 
 	return new_node;
 }
 
-Node* list_insert_before(List* list, Node* node, Node* new_node) {
+ListNode* list_insert_before(List* list, ListNode* node, ListNode* new_node) {
 	/* Invalid arguments */
 	if (list == NULL || new_node == NULL) {
 		return NULL;
@@ -89,12 +89,12 @@ Node* list_insert_before(List* list, Node* node, Node* new_node) {
 		list->head = new_node;
 	}
 
-	list->size+=1;
+	list->len+=1;
 
 	return new_node;
 }
 
-Node* list_insert_at_head(List* list, Node* node) {
+ListNode* list_insert_at_head(List* list, ListNode* node) {
 	if (list == NULL || node == NULL) {
 		return NULL;
 	}
@@ -111,12 +111,12 @@ Node* list_insert_at_head(List* list, Node* node) {
 		list->head = node;
 	}
 
-	list->size+=1;
+	list->len+=1;
 
 	return node;
 }
 
-Node* list_insert_at_tail(List* list, Node* node) {
+ListNode* list_insert_at_tail(List* list, ListNode* node) {
 	if (list == NULL || node == NULL) {
 		return NULL;
 	}
@@ -133,17 +133,17 @@ Node* list_insert_at_tail(List* list, Node* node) {
 		list->tail = node;
 	}
 
-	list->size+=1;
+	list->len+=1;
 
 	return node;
 }
 
-Node* list_push_back(List* list, void* data) {
+ListNode* list_push_back(List* list, __L_DATA_TYPE data) {
 	if (list == NULL || data == NULL) {
 		return NULL;
 	}
 
-	Node* new_node = node_create(data, NULL, list->tail);
+	ListNode* new_node = node_create(data, NULL, list->tail);
 
 	if (list->tail != NULL) {
 		list->tail->next = new_node;
@@ -155,17 +155,17 @@ Node* list_push_back(List* list, void* data) {
 		list->head = new_node;
 	}
 
-	list->size+=1;
+	list->len+=1;
 
 	return new_node;
 }
 
-Node* list_push_front(List* list, void* data) {
+ListNode* list_push_front(List* list, __L_DATA_TYPE data) {
 	if (list == NULL || data == NULL) {
 		return NULL;
 	}
 
-	Node* new_node = node_create(data, list->head, NULL);
+	ListNode* new_node = node_create(data, list->head, NULL);
 
 	if (list->head != NULL) {
 		list->head->prev = new_node;
@@ -177,14 +177,14 @@ Node* list_push_front(List* list, void* data) {
 		list->tail = new_node;
 	}
 
-	list->size+=1;
+	list->len+=1;
 
 	return new_node;
 }
 
-void* list_remove(List* list, Node* node) {
+__L_DATA_TYPE list_remove(List* list, ListNode* node) {
 	if (list == NULL || node == NULL) {
-		return NULL;
+		return __L_DATA_INVALID;
 	}
 
 	if (list->head == node) {
@@ -203,11 +203,11 @@ void* list_remove(List* list, Node* node) {
 		node->next->prev = node->prev;
 	}
 
-	void* data = node->data;
+	__L_DATA_TYPE data = node->data;
 
 	node_destroy(node);
 
-	list->size-=1;
+	list->len-=1;
 
 	return data;
 }

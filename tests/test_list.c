@@ -6,23 +6,23 @@
 int main() {
 
 	List* list = list_create();
-	assert(list->size == 0);
+	assert(list->len == 0);
 
 
 	// Insert at head a node
 	
 	void* data = (void*)0x1;
-	Node* node = node_create(data, NULL, NULL);
+	ListNode* node = node_create(data, NULL, NULL);
 	list_insert_at_head(list, node);
-	assert(list->size == 1);
+	assert(list->len == 1);
 	assert(list->head == node);
 	assert(list->head == list->tail);
 
 
 	// Insert a new node after the previous one
-	Node* node2 = node_create((void*)0x2, NULL, NULL);
+	ListNode* node2 = node_create((void*)0x2, NULL, NULL);
 	list_insert_after(list, node, node2);
-	assert(list->size == 2);
+	assert(list->len == 2);
 	assert(list->tail == node2);
 	assert(list->head == node);
 	assert(node->next == node2);
@@ -35,9 +35,9 @@ int main() {
 
 	// Insert a new node before node 2:
 
-	Node* node3 = node_create((void*)0x3, NULL, NULL);
+	ListNode* node3 = node_create((void*)0x3, NULL, NULL);
 	list_insert_before(list, node2, node3);
-	assert(list->size == 3);
+	assert(list->len == 3);
 	assert(list->head == node);
 	assert(list->tail == node2);
 	assert(list->head->next == node3);
@@ -50,9 +50,9 @@ int main() {
 
 	// Insert a node at the tail
 	
-	Node* node4 = node_create((void*)0x4, NULL, NULL);
+	ListNode* node4 = node_create((void*)0x4, NULL, NULL);
 	list_insert_at_tail(list, node4);
-	assert(list->size == 4);
+	assert(list->len == 4);
 	assert(list->tail == node4);
 	assert(node4->prev == node2);
 	assert(node2->next == node4);
@@ -67,7 +67,7 @@ int main() {
 	list_remove(list, node2);
 	list_remove(list, node3);
 	list_remove(list, node4);
-	assert(list->size == 0);
+	assert(list->len == 0);
 
 
 	// Generic data example test
@@ -80,7 +80,7 @@ int main() {
 
 	list_push_back(list, gde1);
 	list_push_back(list, gde2);
-	assert(list->size == 2);
+	assert(list->len == 2);
 	assert(list->head->data == gde1);
 	assert(list->head->next == list->tail);
 	assert(list->tail->prev == list->head);

@@ -29,7 +29,7 @@ void vec_destroy(Vec* vec) {
 }
 
 void vec_grow(Vec* vec) {
-	size_t new_capacity = vec->capacity * 2;
+	size_t new_capacity = vec->capacity * __V_GROWTH_FACTOR;
 	void** new_items = realloc(vec->items, new_capacity * sizeof(void*));
 	if (new_items == NULL) {
 		perror("Error reallocating memory for items array");
@@ -40,7 +40,7 @@ void vec_grow(Vec* vec) {
 	vec->capacity = new_capacity;
 }
 
-void vec_insert(Vec* vec, size_t item_idx, void* item) {
+void vec_insert(Vec* vec, size_t item_idx, __V_ITEM_TYPE item) {
 	while (item_idx >= vec->capacity) {
 		vec_grow(vec);
 	}
@@ -50,12 +50,12 @@ void vec_insert(Vec* vec, size_t item_idx, void* item) {
 	vec->len++;
 }
 
-void* vec_remove(Vec* vec, size_t item_idx) {
+__V_ITEM_TYPE vec_remove(Vec* vec, size_t item_idx) {
 	if (item_idx >= vec->capacity) {
-		return NULL;
+		return __V_ITEM_INVALID;
 	}
 
-	void* removed = vec->items[item_idx];
+	__V_ITEM_TYPE removed = vec->items[item_idx];
 	vec->items[item_idx] = NULL;
 
 	/* Move items left after removing */
@@ -75,7 +75,7 @@ void* vec_remove(Vec* vec, size_t item_idx) {
 	return removed;
 }
 
-void vec_push(Vec* vec, void* item) {
+void vec_push(Vec* vec, __V_ITEM_TYPE item) {
 	while (vec->len >= vec->capacity) {
 		vec_grow(vec);
 	}
@@ -84,12 +84,12 @@ void vec_push(Vec* vec, void* item) {
 	vec->len+=1;
 }
 
-void* vec_pop(Vec* vec) {
+__V_ITEM_TYPE vec_pop(Vec* vec) {
 	if (vec->len == 0) {
-		return NULL;
+		return __V_ITEM_INVALID;
 	}
 
-	void* popped = vec->items[vec->len-1];
+	__V_ITEM_TYPE popped = vec->items[vec->len-1];
 	vec->items[vec->len-1] = NULL;
 	vec->len-=1;
 

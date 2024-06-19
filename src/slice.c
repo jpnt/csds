@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Slice* slice_create(void* ptr, size_t type_size, size_t start_idx, size_t end_idx) {
+Slice* slice_create(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
 	/* Invalid arguments */
-	if (ptr == NULL) {
+	if (addr == NULL) {
 		return NULL;
 	}
 
@@ -22,7 +22,7 @@ Slice* slice_create(void* ptr, size_t type_size, size_t start_idx, size_t end_id
 		exit(EXIT_FAILURE);
 	}
 
-	slice->ptr = ptr + start_idx * type_size;
+	slice->addr = addr + start_idx * type_size;
 	slice->type_size = type_size;
 	end_idx+=1;
 	slice->len = end_idx - start_idx;
@@ -30,8 +30,8 @@ Slice* slice_create(void* ptr, size_t type_size, size_t start_idx, size_t end_id
 	return slice;
 }
 
-int slice_stack_create(Slice* slice, void* ptr, size_t type_size, size_t start_idx, size_t end_idx) {
-	if (ptr == NULL) {
+int slice_create_using_stack(Slice* slice, void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
+	if (addr == NULL) {
 		return -1;
 	}
 
@@ -43,7 +43,7 @@ int slice_stack_create(Slice* slice, void* ptr, size_t type_size, size_t start_i
 		return -1;
 	}
 
-	slice->ptr = ptr + start_idx * type_size;
+	slice->addr = addr + start_idx * type_size;
 	slice->type_size = type_size;
 	end_idx+=1;
 	slice->len = end_idx - start_idx;
@@ -62,8 +62,8 @@ void slice_destroy(Slice* slice) {
 void* slice_valueat(Slice* slice, size_t idx) {
 	/* Handle if out of bounds */
 	if (idx >= slice->len) {
-		return slice->ptr + (slice->len - 1) * slice->type_size;
+		return slice->addr + (slice->len - 1) * slice->type_size;
 	}
 
-	return slice->ptr + idx * slice->type_size;
+	return slice->addr + idx * slice->type_size;
 }

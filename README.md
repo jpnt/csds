@@ -11,22 +11,31 @@ library aims to serve as a solid foundation for building various applications.
 ### Sequences:
 
 - [x] **Vec** (Dynamic Array)
-  - Can also be used as a stack or a queue.
+  - Growable dynamic array, with configurable growth factor and item type
 
 - [x] **List** (Doubly Linked List)
+  - Suitable for implementing a stack or queue
 
 ### Maps:
 
-- [ ] **Hmap** (Hash Table)
+- [ ] **HashMap** (Hash Table)
+  - Used to store key-value pairs and do fast lookups
 
-- [ ] **Bst** (Balanced Binary Search Tree)
+- [ ] **Btmap** (Balanced Binary Search Tree)
+
+### Trees:
+
+- [ ] **Rbt** (Red-Black Tree)
+
+- [ ] **Avl** (AVL Tree)
 
 ### Miscellaneous:
 
 - [x] **Slice** (Pointer + a Length)
+  - Intended to use with another types or data
 
 - [ ] **Heap** (Binary Heap)
-  - Suitable for implementing a Priority Queue.
+  - Suitable for implementing a priority queue
 
 ## Non-Goals
 
@@ -52,6 +61,7 @@ library aims to serve as a solid foundation for building various applications.
 ## Contributions
 
 Contributions to this project are welcome!
+
 If you have ideas for new data structures, improvements, or bug fixes, feel free
 to open an issue or submit a pull request.
 
