@@ -1,5 +1,5 @@
-#ifndef CSDS_DATA_TYPES_H
-#define CSDS_DATA_TYPES_H
+#ifndef CSDS_DATATYPES_H
+#define CSDS_DATATYPES_H
 
 /* #define __D_INCLUDE_SYS_TYPES */
 
@@ -11,7 +11,7 @@
 #endif /* !__cplusplus */
 #endif /* !NULL */
 
-/* more explicit types */
+
 typedef unsigned int uint;
 typedef signed char int8;
 typedef unsigned char uint8;
@@ -30,8 +30,9 @@ typedef __int64_t int64;
 typedef __uint64_t uint64;
 #endif /* !__D_INCLUDE_SYS_TYPES */
 
+
 #ifndef PI
 #define PI 3.141592653
 #endif /* !PI */
 
-#endif /* !CSDS_DATA_TYPES_H */
+#endif /* !CSDS_DATATYPES_H */
