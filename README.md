@@ -2,9 +2,11 @@
 
 ## Overview
 
-**csds** is a ISO C90 library focused on providing simple implementations of basic and
-fundamental data structures. Designed with clarity and ease of use in mind, this
-library aims to serve as a solid foundation for building various applications.
+**csds** is a ANSI C/ISO C90 library focused on providing simple implementations
+of basic and fundamental data structures. 
+
+Designed with clarity and ease of use in mind, this library aims to serve as a 
+solid foundation for building various applications.
 
 ## Data Structures
 
