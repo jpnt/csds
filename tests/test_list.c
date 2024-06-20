@@ -27,8 +27,8 @@ int main() {
 	assert(nodes[0]->next == nodes[1]);
 	assert(nodes[1]->prev == nodes[0]);
 
-	/*         HEAD     TAIL */
-	/* NULL <- node <-> nodes[1] -> NULL */
+	/*            HEAD       TAIL */
+	/* NULL <- nodes[0] <-> nodes[1] -> NULL */
 	
 
 
@@ -43,8 +43,8 @@ int main() {
 	assert(nodes[2]->next == list->tail);
 	assert(nodes[2]->prev == list->head);
 
-	/*         HEAD               TAIL */
-	/* NULL <- node <-> node3 <-> nodes[1] -> NULL */
+	/*           HEAD                     TAIL */
+	/* NULL <- nodes[0] <-> nodes[2] <-> nodes[1] -> NULL */
 	
 
 	/* Insert a node at the tail */
@@ -57,7 +57,7 @@ int main() {
 	assert(nodes[1]->next == nodes[3]);
 	assert(nodes[3]->next == NULL);
 
-	/*         HEAD                         TAIL */
+	/*          HEAD                                  TAIL */
 	/* NULL <- nodes[0] <-> nodes[2] <-> nodes[1] <-> nodes[3] -> NULL */
 	
 	/* Removal of nodes */
