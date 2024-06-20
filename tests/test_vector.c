@@ -7,7 +7,7 @@ int main() {
 	Vec* vec = vec_create(10);
 	assert(vec->capacity == 10);
 
-	// Use as a stack
+	/* Use as a stack */
 
 	vec_push(vec, (__V_ITEM_TYPE)0x1);
 	vec_push(vec, (__V_ITEM_TYPE)0x2);
@@ -28,7 +28,7 @@ int main() {
 	assert(vec->len == 0);
 
 
-	// Use as a queue
+	/* Use as a queue */
 
 	vec_push(vec, (__V_ITEM_TYPE)0x2);
 	vec_push(vec, (__V_ITEM_TYPE)0x4);
@@ -39,18 +39,18 @@ int main() {
 	assert(vec_remove(vec, 0) == (__V_ITEM_TYPE)0x8);
 
 
-	// Item insertion
+	/* Item insertion */
 	vec_insert(vec, 4, (__V_ITEM_TYPE)0x9);
 	assert(vec->items[4] == (__V_ITEM_TYPE)0x9);
 
 
-	// Dynamic grow
+	/* Dynamic grow */
 	vec_insert(vec, 10, (__V_ITEM_TYPE)0xA);
-	assert(vec->capacity > 10);
+	assert(vec->capacity > 10); /* new capacity depends on growth factor */
 	/* printf("vec->capacity = %zu\n",vec->capacity); */
 
 
-	// Free memory
+	/* Free memory */
 	vec_destroy(vec);
 
 	return 0;

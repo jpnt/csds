@@ -3,6 +3,8 @@
 #include <stdlib.h>
 
 Slice* slice_create(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
+	Slice* slice;
+
 	/* Invalid arguments */
 	if (addr == NULL) {
 		return NULL;
@@ -16,13 +18,13 @@ Slice* slice_create(void* addr, size_t type_size, size_t start_idx, size_t end_i
 		return NULL;
 	}
 
-	Slice* slice = (Slice*) malloc(sizeof(Slice));
+	slice = (Slice*) malloc(sizeof(Slice));
 	if (slice == NULL) {
 		perror("Error allocating memory for slice");
 		exit(EXIT_FAILURE);
 	}
 
-	slice->addr = addr + start_idx * type_size;
+	slice->addr = (char*)addr + start_idx * type_size;
 	slice->type_size = type_size;
 	end_idx+=1;
 	slice->len = end_idx - start_idx;
@@ -43,7 +45,7 @@ int slice_create_using_stack(Slice* slice, void* addr, size_t type_size, size_t 
 		return -1;
 	}
 
-	slice->addr = addr + start_idx * type_size;
+	slice->addr = (char*)addr + start_idx * type_size;
 	slice->type_size = type_size;
 	end_idx+=1;
 	slice->len = end_idx - start_idx;
@@ -62,8 +64,8 @@ void slice_destroy(Slice* slice) {
 void* slice_valueat(Slice* slice, size_t idx) {
 	/* Handle if out of bounds */
 	if (idx >= slice->len) {
-		return slice->addr + (slice->len - 1) * slice->type_size;
+		return (char*)slice->addr + (slice->len - 1) * slice->type_size;
 	}
 
-	return slice->addr + idx * slice->type_size;
+	return (char*)slice->addr + idx * slice->type_size;
 }

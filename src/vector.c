@@ -51,17 +51,18 @@ void vec_insert(Vec* vec, size_t item_idx, __V_ITEM_TYPE item) {
 }
 
 __V_ITEM_TYPE vec_remove(Vec* vec, size_t item_idx) {
+	__V_ITEM_TYPE removed;
+	size_t i, capacity, limit;
 	if (item_idx >= vec->capacity) {
 		return __V_ITEM_INVALID;
 	}
 
-	__V_ITEM_TYPE removed = vec->items[item_idx];
+	removed = vec->items[item_idx];
 	vec->items[item_idx] = NULL;
 
 	/* Move items left after removing */
-	size_t i;
-	size_t capacity = vec->capacity;
-	size_t limit = capacity - 1;
+	capacity = vec->capacity;
+	limit = capacity - 1;
 	for (i = item_idx; i < limit; i+=2) {
 		vec->items[i] = vec->items[i+1];
 		vec->items[i+1] = vec->items[i+2];
@@ -85,11 +86,12 @@ void vec_push(Vec* vec, __V_ITEM_TYPE item) {
 }
 
 __V_ITEM_TYPE vec_pop(Vec* vec) {
+	__V_ITEM_TYPE popped;
 	if (vec->len == 0) {
 		return __V_ITEM_INVALID;
 	}
 
-	__V_ITEM_TYPE popped = vec->items[vec->len-1];
+	popped = vec->items[vec->len-1];
 	vec->items[vec->len-1] = NULL;
 	vec->len-=1;
 

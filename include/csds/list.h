@@ -29,4 +29,4 @@ extern ListNode* list_push_front(List* list, __L_DATA_TYPE data);
 /* removes a node from the list and returns it */
 extern __L_DATA_TYPE list_remove(List* list, ListNode* node);
 
-#endif // !CSDS_LIST_H
+#endif /* !CSDS_LIST_H */

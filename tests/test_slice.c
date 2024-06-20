@@ -4,27 +4,30 @@
 #include <stdlib.h>
 
 int main() {
+	Slice* slice;
+	Slice stack_slice;
 	int array[7] = {1,2,3,4,5,6,7};
+	int i, len, first_value;
 
-	// Slice in the heap
+	/* Slice in the heap */
 
-	Slice* slice = slice_create(array, sizeof(int), 1, 5);
+	slice = slice_create(array, sizeof(int), 1, 5);
 	if (slice == NULL) {
 		perror("slice_create");
 		exit(1);
 	}
 
-	int len = slice->len;
+	len = slice->len;
 	assert(len == 5);
 	
-	// Get the values in the slice
-	int first = *(int*)slice_valueat(slice, 0);
-	assert(first == 2);
+	/* Get the values in the slice */
+	first_value = *(int*)slice_valueat(slice, 0);
+	assert(first_value == 2);
 
-	for (int i = 0; i < len; i++) {
+	for (i=0; i < len; i++) {
 		int value = *(int*)slice_valueat(slice, i);
-		// 2, 3, 4, 5, 6
-		//printf("%d\n", value);
+		/*  2, 3, 4, 5, 6 */
+		/* printf("%d\n", value); */
 		assert(value == i+2);;
 	}
 
@@ -32,25 +35,25 @@ int main() {
 
 
 
-	// And a slice in the stack
+	/* Slice in the stack */
 	
-	Slice stk_sl;
-	int ret = slice_create_using_stack(&stk_sl, array, sizeof(int), 3, 6);
-	if (ret == -1) {
+	if (slice_create_using_stack(&stack_slice, array, sizeof(int), 3, 6) == -1) {
 		perror("slice_create_using_stack");
 		exit(2);
 	}
 
-	len = stk_sl.len;
+	len = stack_slice.len;
 	assert(len == 4);
 
-	first = *(int*)slice_valueat(&stk_sl, 0);
-	assert(first == 4);
+	first_value = *(int*)slice_valueat(&stack_slice, 0);
+	assert(first_value == 4);
 
-	for (int i = 0; i < len; i++) {
-		int value = *(int*)slice_valueat(&stk_sl, i);
-		// 4, 5, 6, 7
-		//printf("%d\n", value);
+	for (i=0; i < len; i++) {
+		int value = *(int*)slice_valueat(&stack_slice, i);
+		/*  4, 5, 6, 7 */
+		/* printf("%d\n", value); */
 		assert(value == i+4);
 	}
+
+	return 0;
 }

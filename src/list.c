@@ -16,12 +16,14 @@ List* list_create() {
 }
 
 void list_destroy(List* list) {
+	ListNode* current;
+	ListNode* next;
+
 	if (list == NULL) {
 		return;
 	}
 
-	ListNode* current = list->head;
-	ListNode* next;
+	current = list->head;
 
 	while (current != NULL) {
 		next = current->next;
@@ -139,11 +141,13 @@ ListNode* list_insert_at_tail(List* list, ListNode* node) {
 }
 
 ListNode* list_push_back(List* list, __L_DATA_TYPE data) {
+	ListNode* new_node;
+
 	if (list == NULL || data == NULL) {
 		return NULL;
 	}
 
-	ListNode* new_node = node_create(data, NULL, list->tail);
+	new_node = node_create(data, NULL, list->tail);
 
 	if (list->tail != NULL) {
 		list->tail->next = new_node;
@@ -161,11 +165,13 @@ ListNode* list_push_back(List* list, __L_DATA_TYPE data) {
 }
 
 ListNode* list_push_front(List* list, __L_DATA_TYPE data) {
+	ListNode* new_node;
+
 	if (list == NULL || data == NULL) {
 		return NULL;
 	}
 
-	ListNode* new_node = node_create(data, list->head, NULL);
+	new_node = node_create(data, list->head, NULL);
 
 	if (list->head != NULL) {
 		list->head->prev = new_node;
@@ -183,6 +189,8 @@ ListNode* list_push_front(List* list, __L_DATA_TYPE data) {
 }
 
 __L_DATA_TYPE list_remove(List* list, ListNode* node) {
+	__L_DATA_TYPE data;
+
 	if (list == NULL || node == NULL) {
 		return __L_DATA_INVALID;
 	}
@@ -203,7 +211,7 @@ __L_DATA_TYPE list_remove(List* list, ListNode* node) {
 		node->next->prev = node->prev;
 	}
 
-	__L_DATA_TYPE data = node->data;
+	data = node->data;
 
 	node_destroy(node);
 

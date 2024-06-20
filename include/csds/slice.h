@@ -18,4 +18,4 @@ extern void slice_destroy(Slice* slice);
 /* returns the value at the specified index in the slice */
 extern void* slice_valueat(Slice* slice, size_t idx);
 
-#endif // !CSDS_SLICE_H
+#endif /* !CSDS_SLICE_H */

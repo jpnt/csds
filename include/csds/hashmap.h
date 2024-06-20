@@ -5,20 +5,20 @@
 
 #ifndef __H_KEY_TYPE
 #define __H_KEY_TYPE void*
-#endif // !__H_KEY_TYPE
+#endif /* !__H_KEY_TYPE */
 
 #ifndef __H_VALUE_TYPE
 #define __H_VALUE_TYPE void*
-#endif // !__H_VALUE_TYPE
+#endif /* !__H_VALUE_TYPE */
 
 /* what to return if the value is invalid, has to be of type __H_VALUE_TYPE */
 #ifndef __H_VALUE_INVALID
 #define __H_VALUE_INVALID NULL
-#endif // !__H_VALUE_INVALID
+#endif /* !__H_VALUE_INVALID */
 
 #ifndef __H_GROWTH_FACTOR
 #define __H_GROWTH_FACTOR 1.5
-#endif // !__H_GROWTH_FACTOR
+#endif /* !__H_GROWTH_FACTOR */
 
 typedef struct {
 	__H_KEY_TYPE* keys; /* array of keys */
@@ -41,4 +41,4 @@ extern size_t hash_djb2(const __H_KEY_TYPE* key); /* sample hash function, retur
 extern int compare_str(const char* a, const char* b); /* compare function for strings */
 extern int compare_int(const int a, const int b); /* compare function for integers */
 
-#endif // !CSDS_HASHMAP_H
+#endif /* !CSDS_HASHMAP_H */
