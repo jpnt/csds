@@ -1,7 +1,7 @@
 #ifndef CSDS_DATA_TYPES_H
 #define CSDS_DATA_TYPES_H
 
-#define __D_INCLUDE_SYS_TYPES
+/* #define __D_INCLUDE_SYS_TYPES */
 
 #ifndef NULL
 #ifdef __cplusplus
@@ -15,13 +15,16 @@
 typedef unsigned int uint;
 typedef signed char int8;
 typedef unsigned char uint8;
-typedef signed short int16;
-typedef unsigned short uint16;
+typedef signed short int int16;
+typedef unsigned short int uint16;
 typedef signed int int32;
 typedef unsigned int uint32;
 typedef float real32;
 typedef double real64;
-#ifdef __D_INCLUDE_SYS_TYPES
+#ifndef __D_INCLUDE_SYS_TYPES
+typedef signed long int int64;
+typedef unsigned long int uint64;
+#else
 #include <sys/types.h>
 typedef __int64_t int64;
 typedef __uint64_t uint64;
