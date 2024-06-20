@@ -1,6 +1,5 @@
 TODO
 
-* ISO c90 full support
+* debug.c implementation: MemDebug struct
 * HashMap implementation
 * BtreeMap
-* MemDebug, test with other allocators
