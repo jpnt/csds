@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Slice* slice_create(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
+Slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
 	Slice* slice;
 
 	/* Invalid arguments */
@@ -32,7 +32,15 @@ Slice* slice_create(void* addr, size_t type_size, size_t start_idx, size_t end_i
 	return slice;
 }
 
-int slice_create_using_stack(Slice* slice, void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
+void slice_dealloc(Slice* slice) {
+	if (slice == NULL) {
+		return;
+	}
+
+	free(slice);
+}
+
+int slice_init(Slice* slice, void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
 	if (addr == NULL) {
 		return -1;
 	}
@@ -51,14 +59,6 @@ int slice_create_using_stack(Slice* slice, void* addr, size_t type_size, size_t 
 	slice->len = end_idx - start_idx;
 
 	return 0;
-}
-
-void slice_destroy(Slice* slice) {
-	if (slice == NULL) {
-		return;
-	}
-
-	free(slice);
 }
 
 void* slice_valueat(Slice* slice, size_t idx) {

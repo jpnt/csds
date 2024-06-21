@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-List* list_create() {
+List* list_alloc() {
 	List* list = (List*) malloc(sizeof(List));
 	if (list == NULL) {
 		perror("Error allocating memory for doubly linked list");
@@ -15,7 +15,7 @@ List* list_create() {
 	return list;
 }
 
-void list_destroy(List* list) {
+void list_dealloc(List* list) {
 	ListNode* current;
 	ListNode* next;
 
@@ -27,7 +27,7 @@ void list_destroy(List* list) {
 
 	while (current != NULL) {
 		next = current->next;
-		node_destroy(current);
+		list_node_dealloc(current);
 		current = next;
 	}
 
@@ -147,7 +147,7 @@ ListNode* list_push_back(List* list, __L_DATA_TYPE data) {
 		return NULL;
 	}
 
-	new_node = node_create(data, NULL, list->tail);
+	new_node = list_node_alloc(data, NULL, list->tail);
 
 	if (list->tail != NULL) {
 		list->tail->next = new_node;
@@ -171,7 +171,7 @@ ListNode* list_push_front(List* list, __L_DATA_TYPE data) {
 		return NULL;
 	}
 
-	new_node = node_create(data, list->head, NULL);
+	new_node = list_node_alloc(data, list->head, NULL);
 
 	if (list->head != NULL) {
 		list->head->prev = new_node;
@@ -213,7 +213,7 @@ __L_DATA_TYPE list_remove(List* list, ListNode* node) {
 
 	data = node->data;
 
-	node_destroy(node);
+	list_node_dealloc(node);
 
 	list->len-=1;
 

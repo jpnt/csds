@@ -31,8 +31,8 @@ typedef struct {
 	int (*compare)(const __H_KEY_TYPE* a, __H_KEY_TYPE* b); /* compare function between two keys */
 } HashMap;
 
-extern HashMap* hashmap_create(size_t len, size_t (*hash)(const __H_KEY_TYPE* key)); /* allocates memory for the hash map */
-extern void hashmap_destroy(HashMap* map); /* frees memory that was allocated */
+extern HashMap* hashmap_alloc(size_t len, size_t (*hash)(const __H_KEY_TYPE* key)); /* allocates memory for the hash map */
+extern void hashmap_dealloc(HashMap* map); /* frees memory that was allocated */
 extern size_t hashmap_insert(HashMap* map, __H_KEY_TYPE key, __H_VALUE_TYPE value); /* inserts key-value pair into hash map, returns hash */
 extern __H_VALUE_TYPE hashmap_value(HashMap* map, __H_KEY_TYPE key); /* gets value for a key */
 extern void hashmap_remove(HashMap* map, __H_KEY_TYPE key); /* removes key-value pair from the hash map */

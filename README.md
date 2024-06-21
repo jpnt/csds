@@ -36,6 +36,9 @@ solid foundation for building various applications.
 - [x] **Slice** (Pointer + a Length)
   - Intended to use with another types or data
 
+- [ ] **MemDebugBuf** (Memory Debugging Struct)
+  - Track allocations, detect buffer overflows, double frees and print memory report
+
 - [ ] **Heap** (Binary Heap)
   - Suitable for implementing a priority queue
 
@@ -62,6 +65,9 @@ solid foundation for building various applications.
 
 - **Portable:**
   - Avoid libraries and use old standard to prioritize portability accross multiple systems.
+
+- **Modular:**
+  - Separate data structures and functionality, giving the possibility of including just what is needed.
 
 ## Contributions
 

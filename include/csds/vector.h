@@ -22,9 +22,10 @@ typedef struct {
 	size_t capacity;
 } Vec;
 
-extern Vec* vec_create(size_t capacity); /* allocate new vector with the specified initial capacity */
-extern void vec_destroy(Vec* vec); /* free the vector and optionally free all associated memory */
-extern void vec_grow(Vec* vec); /* grow the vector to accommodate more items */
+extern Vec* vec_alloc(size_t capacity); /* allocate new vector with the specified initial capacity */
+extern void vec_dealloc(Vec* vec); /* free the vector and optionally free all associated memory */
+extern void vec_grow(Vec* vec); /* grow/reallocate the vector to accommodate more items */
+/* whole purpose of having Vec is for it to be able to grow and accommodate generic values, so there is no vec_init */
 extern void vec_insert(Vec* vec, size_t item_idx, __V_ITEM_TYPE item); /* insert an item at the specified index */
 extern __V_ITEM_TYPE vec_remove(Vec* vec, size_t item_idx); /* remove and return the item at the specified index */
 extern void vec_push(Vec* vec, __V_ITEM_TYPE item); /* push an item onto the end of the vector */

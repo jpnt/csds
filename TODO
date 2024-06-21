@@ -1,5 +1,6 @@
 TODO
 
 * debug.c implementation: MemDebug struct
+* debug.h test support for mutex
 * HashMap implementation
 * BtreeMap

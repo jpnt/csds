@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Vec* vec_create(size_t capacity) {
+Vec* vec_alloc(size_t capacity) {
 	Vec* vec = (Vec*) malloc(sizeof(Vec));
 	if (vec == NULL) {
 		perror("Error allocating memory for vector");
@@ -21,7 +21,7 @@ Vec* vec_create(size_t capacity) {
 	return vec;
 }
 
-void vec_destroy(Vec* vec) {
+void vec_dealloc(Vec* vec) {
 	if (vec != NULL) {
 		free(vec->items);
 		free(vec);

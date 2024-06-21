@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-ListNode* node_create(__L_DATA_TYPE data, ListNode* next, ListNode* prev) {
+ListNode* list_node_alloc(__L_DATA_TYPE data, ListNode* next, ListNode* prev) {
 	ListNode* new_node = (ListNode*) malloc(sizeof(ListNode));
 	if (new_node == NULL) {
 		return NULL;
@@ -15,7 +15,7 @@ ListNode* node_create(__L_DATA_TYPE data, ListNode* next, ListNode* prev) {
 	return new_node;
 }
 
-void node_destroy(ListNode* node) {
+void list_node_dealloc(ListNode* node) {
 	if (node == NULL) {
 		return;
 	}

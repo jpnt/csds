@@ -11,9 +11,9 @@ typedef struct {
 } List;
 
 /* allocates memory in the heap for the linked list */
-extern List* list_create();
+extern List* list_alloc();
 /* frees linked list memory and optioonal node data */
-extern void list_destroy(List* list);
+extern void list_dealloc(List* list);
 /* inserts a new node after the specified node */
 extern ListNode* list_insert_after(List* list, ListNode* node, ListNode* new_node);
 /* inserts a new node before the specified node */

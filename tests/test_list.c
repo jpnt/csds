@@ -6,12 +6,12 @@ int main() {
 	void* data;
 	ListNode* nodes[4];
 
-	List* list = list_create();
+	List* list = list_alloc();
 	assert(list->len == 0);
 
 	/* Insert at head a node */
 	data = (void*)0x1;
-	nodes[0] = node_create(data, NULL, NULL);
+	nodes[0] = list_node_alloc(data, NULL, NULL);
 	list_insert_at_head(list, nodes[0]);
 	assert(list->len == 1);
 	assert(list->head == nodes[0]);
@@ -19,7 +19,7 @@ int main() {
 
 
 	/* Insert a new node after the previous one */
-	nodes[1] = node_create((void*)0x2, NULL, NULL);
+	nodes[1] = list_node_alloc((void*)0x2, NULL, NULL);
 	list_insert_after(list, nodes[0], nodes[1]);
 	assert(list->len == 2);
 	assert(list->tail == nodes[1]);
@@ -34,7 +34,7 @@ int main() {
 
 	/* Insert a new node before node 2: */
 
-	nodes[2] = node_create((void*)0x3, NULL, NULL);
+	nodes[2] = list_node_alloc((void*)0x3, NULL, NULL);
 	list_insert_before(list, nodes[1], nodes[2]);
 	assert(list->len == 3);
 	assert(list->head == nodes[0]);
@@ -49,7 +49,7 @@ int main() {
 
 	/* Insert a node at the tail */
 	
-	nodes[3] = node_create((void*)0x4, NULL, NULL);
+	nodes[3] = list_node_alloc((void*)0x4, NULL, NULL);
 	list_insert_at_tail(list, nodes[3]);
 	assert(list->len == 4);
 	assert(list->tail == nodes[3]);
@@ -57,7 +57,7 @@ int main() {
 	assert(nodes[1]->next == nodes[3]);
 	assert(nodes[3]->next == NULL);
 
-	/*          HEAD                                  TAIL */
+	/*          HEAD                                   TAIL */
 	/* NULL <- nodes[0] <-> nodes[2] <-> nodes[1] <-> nodes[3] -> NULL */
 	
 	/* Removal of nodes */
@@ -67,7 +67,7 @@ int main() {
 	list_remove(list, nodes[3]);
 	assert(list->len == 0);
 
-	list_destroy(list);
+	list_dealloc(list);
 
 	return 0;
 }

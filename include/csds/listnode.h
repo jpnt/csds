@@ -17,8 +17,8 @@ typedef struct ListNode {
 } ListNode;
 
 /* creates a new node with specified data, next, and prev pointers */
-extern ListNode* node_create(__L_DATA_TYPE data, ListNode* next, ListNode* prev);
+extern ListNode* list_node_alloc(__L_DATA_TYPE data, ListNode* next, ListNode* prev);
 /* frees memory allocated for the node */
-extern void node_destroy(ListNode* node);
+extern void list_node_dealloc(ListNode* node);
 
 #endif /* !CSDS_LISTNODE_H */

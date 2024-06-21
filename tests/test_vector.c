@@ -1,10 +1,10 @@
 #include "../include/csds/vector.h"
 #include <assert.h>
-#include <stdio.h>
+/* #include <stdio.h> */
 
 int main() {
 
-	Vec* vec = vec_create(10);
+	Vec* vec = vec_alloc(10);
 	assert(vec->capacity == 10);
 
 	/* Use as a stack */
@@ -51,7 +51,7 @@ int main() {
 
 
 	/* Free memory */
-	vec_destroy(vec);
+	vec_dealloc(vec);
 
 	return 0;
 }
