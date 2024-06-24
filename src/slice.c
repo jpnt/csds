@@ -64,6 +64,8 @@ int slice_init(Slice* slice, void* addr, size_t type_size, size_t start_idx, siz
 void* slice_valueat(Slice* slice, size_t idx) {
 	/* Handle if out of bounds */
 	if (idx >= slice->len) {
+		fprintf(stderr, "(WARN) slice_valueat: index %lu out of bounds for slice of length %lu\n",
+				idx, slice->len);
 		return (char*)slice->addr + (slice->len - 1) * slice->type_size;
 	}
 
