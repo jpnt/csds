@@ -1,5 +1,5 @@
-#ifndef CSDS_VECTOR_H
-#define CSDS_VECTOR_H
+#ifndef CSDS_VEC_H
+#define CSDS_VEC_H
 
 #include <stddef.h>
 
@@ -31,4 +31,4 @@ extern __V_ITEM_TYPE vec_remove(Vec* vec, size_t item_idx); /* remove and return
 extern void vec_push(Vec* vec, __V_ITEM_TYPE item); /* push an item onto the end of the vector */
 extern __V_ITEM_TYPE vec_pop(Vec* vec); /* pop and return the item from the end of the vector */
 
-#endif /* !CSDS_VECTOR_H */
+#endif /* !CSDS_VEC_H */

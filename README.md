@@ -36,8 +36,8 @@ solid foundation for building various applications.
 - [x] **Slice** (Pointer + a Length)
   - Intended to use with another types or data
 
-- [ ] **MemDebugBuf** (Memory Debugging Struct)
-  - Track allocations, detect buffer overflows, double frees and print memory report
+- [ ] **MemDebug** (Memory Debugging)
+  - Track allocations, detect leaks, double frees and print memory report
 
 - [ ] **Heap** (Binary Heap)
   - Suitable for implementing a priority queue
