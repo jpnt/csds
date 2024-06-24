@@ -1,6 +1,9 @@
 TODO
 
-* debug.c implementation: MemDebug struct
+* debug.h change struct to data oriented (SOA), change functions
 * debug.h test support for mutex
-* HashMap implementation
-* BtreeMap
+* make {List,ListNode} allocations more explicit
+* HashMap implementation, evalute to see if its worth it
+* TreeMap, evaluate ""
+* Look at Arc from Rust
+* More Data Oriented Stuff

@@ -9,7 +9,7 @@ Vec* vec_alloc(size_t capacity) {
 		exit(EXIT_FAILURE);
 	}
 
-	vec->items = (void**) calloc(capacity, sizeof(void*));
+	vec->items = (__V_ITEM_TYPE*) calloc(capacity, sizeof(__V_ITEM_TYPE));
 	if (vec->items == NULL) {
 		perror("Error allocating memory for items array");
 		free(vec);
@@ -30,7 +30,7 @@ void vec_dealloc(Vec* vec) {
 
 void vec_grow(Vec* vec) {
 	size_t new_capacity = vec->capacity * __V_GROWTH_FACTOR;
-	void** new_items = realloc(vec->items, new_capacity * sizeof(void*));
+	__V_ITEM_TYPE* new_items = realloc(vec->items, new_capacity * sizeof(__V_ITEM_TYPE));
 	if (new_items == NULL) {
 		perror("Error reallocating memory for items array");
 		exit(EXIT_FAILURE);
