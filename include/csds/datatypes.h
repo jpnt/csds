@@ -19,8 +19,6 @@ typedef signed short int int16;
 typedef unsigned short int uint16;
 typedef signed int int32;
 typedef unsigned int uint32;
-typedef float real32;
-typedef double real64;
 #ifndef __DT_INCLUDE_SYS_TYPES
 typedef signed long int int64;
 typedef unsigned long int uint64;
