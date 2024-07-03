@@ -31,3 +31,6 @@
 
 # Ignore swap files used by Vim
 .swp
+latex
+html
+.ccls-cache

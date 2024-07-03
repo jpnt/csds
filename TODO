@@ -1,9 +1,0 @@
-TODO
-
-* debug.h change struct to data oriented (SOA), change functions
-* debug.h test support for mutex
-* make {List,ListNode} allocations more explicit
-* HashMap implementation, evalute to see if its worth it
-* TreeMap, evaluate ""
-* Look at Arc from Rust
-* More Data Oriented Stuff

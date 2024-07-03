@@ -23,7 +23,7 @@ solid foundation for building various applications.
 - [ ] **HashMap** (Hash Table)
   - Used to store key-value pairs and do fast lookups
 
-- [ ] **Btmap** (Balanced Binary Search Tree)
+- [ ] **TreeMap** (Balanced Binary Search Tree)
 
 ### Trees:
 
