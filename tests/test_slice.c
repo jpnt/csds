@@ -1,63 +1,65 @@
 #include "../include/csds/slice.h"
-#include <assert.h>
-#include <stdio.h>
+#include "../csds_femtotest.h"
+#include <stdlib.h>
 
-int main() {
+/* Slice in the heap */
+void test_slice_heap()
+{
 	Slice* slice;
-	Slice stack_slice;
-	int array[7] = {1,2,3,4,5,6,7};
-	int i, len, value, first_value, oob;
+	char str[] = "address + type + length";
+	size_t len;
+	/* String to store a copy of the slice we create */
+	char str_slice[10];
 
-	/* Slice in the heap */
-
-	slice = slice_alloc(array, sizeof(int), 1, 5);
-	if (slice == NULL) {
-		perror("slice_create");
-		return 1;
-	}
+	slice = slice_alloc(str, sizeof(char), 10, 13);
 
 	len = slice->len;
-	assert(len == 5);
-	
-	/* Get the values in the slice */
-	first_value = *(int*)slice_valueat(slice, 0);
-	assert(first_value == 2);
 
-	for (i=0; i < len; i++) {
-		value = *(int*)slice_valueat(slice, i);
-		/*  2, 3, 4, 5, 6 */
-		/* printf("%d\n", value); */
-		assert(value == i+2);
-	}
+	ASSERT_EQUALS(len, 13-10+1);
+
+	strncpy(str_slice, slice->addr, slice->len);
+	str_slice[slice->len] = '\0';
+
+	ASSERT_STR_EQUALS(str_slice, "type");
 
 	slice_dealloc(slice);
+}
 
+/* Slice in the stack */
+void test_slice_stack()
+{
+	Slice slice;
+	int arr[] = {1,2,3,4,5,6,7};
+	/*                 ^   ^    */
+	/*              start  end  */
+	int value, oobs;
 
-
-	/* Slice in the stack */
-	
-	if (slice_init(&stack_slice, array, sizeof(int), 3, 6) == -1) {
+	if (slice_init(&slice, arr, sizeof(int), 3, 5) == -1) {
 		perror("slice_create_using_stack");
-		return 2;
+		exit(1);
 	}
 
-	len = stack_slice.len;
-	assert(len == 4);
+	ASSERT_EQUALS(3, slice.len);
 
-	first_value = *(int*)slice_valueat(&stack_slice, 0);
-	assert(first_value == 4);
+	value = *(int*)slice_valueat(&slice, 0);
+	ASSERT_EQUALS(4, value);
 
-	for (i=0; i < len; i++) {
-		value = *(int*)slice_valueat(&stack_slice, i);
-		/*  4, 5, 6, 7 */
-		/* printf("%d\n", value); */
-		assert(value == i+4);
-	}
+	value = *(int*)slice_valueat(&slice, 1);
+	ASSERT_EQUALS(5, value);
 
-	/* Try to access a value out of bounds */
-	oob = *(int*)slice_valueat(&stack_slice, len);
-	/* Default behavior is to return the last element */
-	assert(oob == value);
+	value =*(int*)slice_valueat(&slice, 2);
+	ASSERT_EQUALS(6, value);
 
-	return 0;
+	/* Try to access out of bounds index */
+	oobs = *(int*)slice_valueat(&slice, 69);
+	/* Default behavior is to return last element of the slice */
+	ASSERT_EQUALS(oobs, 6);
+}
+
+int main()
+{
+	TEST_RUN(test_slice_heap, "test_slice_heap");
+	TEST_RUN(test_slice_stack, "test_slice_stack");
+
+	TEST_REPORT();
 }

@@ -56,8 +56,8 @@ static long ft_ticks = 0;
 } while(0)
 
 #define TEST_REPORT() do{\
-	printf("REPORT: %d passed; %d failed; %ld ticks\n",\
-			ft_tests-ft_fails, ft_fails, ft_ticks);\
+	printf("REPORT: %s: %d passed; %d failed; %ld ticks\n",\
+			__FILE__, ft_tests-ft_fails, ft_fails, ft_ticks);\
 	if (ft_fails != 0) {\
 		printf("%c%sFAILED!%c%s\n",\
 			FT_COLOR_CODE, FT_COLOR_RED, FT_COLOR_CODE, FT_COLOR_RESET);\
