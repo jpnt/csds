@@ -17,8 +17,8 @@ void test_slice_heap()
 
 	ASSERT_EQUALS(len, 13-10+1);
 
-	strncpy(str_slice, slice->addr, slice->len);
-	str_slice[slice->len] = '\0';
+	strncpy(str_slice, slice->addr, len);
+	str_slice[len] = '\0';
 
 	ASSERT_STR_EQUALS(str_slice, "type");
 

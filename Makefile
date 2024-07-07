@@ -1,6 +1,8 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -fanalyzer -std=c90 -pedantic -Iinclude
+# CC = clang
+# CFLAGS = -Wall -Wextra -Xanalyzer -std=c90 -pedantic -Iinclude
 
 # Directories
 BUILD_DIR = build

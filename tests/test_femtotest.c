@@ -1,4 +1,5 @@
 #include "../csds_femtotest.h"
+#include <stdio.h>
 
 void test1() {
 	ASSERT(1 == 1, "should not fail");
@@ -12,7 +13,7 @@ void test1() {
 
 
 void test2() {
-	ASSERT_FLOAT_EQUALS(10, 10);
+	ASSERT_FLOAT_EQUALS(10.0, 10.001);
 
 	/* ASSERT_STR_EQUALS("asd", "ad"); */
 }
