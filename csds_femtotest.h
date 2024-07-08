@@ -50,20 +50,20 @@ static long ft_ticks = 0;
 	test_fn();\
 	end = clock()-start;\
 	ft_ticks+=end;\
-	printf("%s -- %d passed; %d failed; %ld ticks\n\n",\
+	printf("%s -- %d passed; %d failed; %ld ticks\n",\
 			test_name, ft_tests-ft_tests_before-ft_fails+ft_fails_before,\
 			ft_fails-ft_fails_before, end);\
 } while(0)
 
 #define TEST_REPORT() do{\
-	printf("REPORT: %s: %d passed; %d failed; %ld ticks\n",\
+	printf("REPORT: %s: %d passed; %d failed; %ld ticks -- ",\
 			__FILE__, ft_tests-ft_fails, ft_fails, ft_ticks);\
 	if (ft_fails != 0) {\
-		printf("%c%sFAILED!%c%s\n",\
+		printf("%c%sFAILED!%c%s\n\n",\
 			FT_COLOR_CODE, FT_COLOR_RED, FT_COLOR_CODE, FT_COLOR_RESET);\
 		return 1;\
 	} else {\
-		printf("%c%sPASSED!%c%s\n",\
+		printf("%c%sPASSED!%c%s\n\n",\
 			FT_COLOR_CODE, FT_COLOR_GREEN, FT_COLOR_CODE, FT_COLOR_RESET);\
 		return 0;\
 	}\
