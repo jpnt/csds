@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
-	Slice* slice;
+struct csds_slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
+	struct csds_slice* slice;
 
 	/* Invalid arguments */
 	if (addr == NULL) {
@@ -18,8 +18,8 @@ Slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_id
 		return NULL;
 	}
 
-	slice = (Slice*) malloc(sizeof(Slice));
-	if (slice == NULL) {
+        slice = (struct csds_slice*) CSDS_SLICE_ALLOC(sizeof(struct csds_slice));
+        if (slice == NULL) {
 		perror("Error allocating memory for slice");
 		exit(EXIT_FAILURE);
 	}
@@ -32,15 +32,15 @@ Slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_id
 	return slice;
 }
 
-void slice_dealloc(Slice* slice) {
+void slice_dealloc(struct csds_slice* slice) {
 	if (slice == NULL) {
 		return;
 	}
 
-	free(slice);
+        CSDS_SLICE_DEALLOC(slice);
 }
 
-int slice_init(Slice* slice, void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
+int slice_init(struct csds_slice* slice, void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
 	if (addr == NULL) {
 		return -1;
 	}
@@ -61,7 +61,7 @@ int slice_init(Slice* slice, void* addr, size_t type_size, size_t start_idx, siz
 	return 0;
 }
 
-void* slice_valueat(Slice* slice, size_t idx) {
+void* slice_valueat(struct csds_slice* slice, size_t idx) {
 	/* Handle if out of bounds */
 	if (idx >= slice->len) {
 		fprintf(stderr, "(WARN) slice_valueat: index %lu out of bounds for slice of length %lu\n",
