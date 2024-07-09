@@ -8,8 +8,6 @@ of basic and fundamental data structures.
 Designed with clarity and ease of use in mind, this library aims to serve as a
 solid foundation for building various applications.
 
-For usage, consult the (./tests/)[tests].
-
 ## Data Structures
 
 ### Sequences:
