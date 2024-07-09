@@ -57,15 +57,15 @@ useful are were designed to work outside of csds.
 
 ## Non-Goals
 
-- No "sort" functions
+- "Sort" functions
 
-- No "get" funtions
+- "Get" funtions
 
-- No "set" functions
+- "Set" functions
 
-- No support for niche features
+- Support for niche features
 
-- No hidden control flow
+- Hidden control flow
 
 - Excessive usage of macros
 
