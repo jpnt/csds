@@ -1,5 +1,4 @@
 #include "../include/csds_error.h"
-#include <stdio.h>
 
 void handle_error(int error_code, const char* file, int line)
 {
