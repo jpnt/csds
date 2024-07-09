@@ -21,6 +21,12 @@ void handle_error(int error_code, const char* file, int line)
 	case CSDS_ERROR_VEC_REALLOC_FAILED:
 		errmsg = "Failed to reallocate memory.";
 		break;
+	case CSDS_ERROR_VEC_OUT_OF_BOUNDS:
+		errmsg = "Vector out of bounds.";
+		break;
+	case CSDS_ERROR_VEC_EMPTY:
+		errmsg = "Vector is empty.";
+		break;
 
 	default:
 		errmsg = "Unknown error code.";
