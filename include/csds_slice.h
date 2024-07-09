@@ -2,9 +2,8 @@
 #define CSDS_SLICE_H
 
 #include <stddef.h>
-
-#define CSDS_SLICE_ALLOC(size)	malloc((size))
-#define CSDS_SLICE_DEALLOC(ptr)	free((ptr))
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct csds_slice Slice;
 

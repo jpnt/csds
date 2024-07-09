@@ -1,6 +1,13 @@
 #include "../include/csds_slice.h"
-#include <stdio.h>
-#include <stdlib.h>
+
+/* Memory allocation configuration */
+void* CSDS_SLICE_ALLOC(size_t size) {
+	return malloc(size);
+}
+
+void CSDS_SLICE_DEALLOC(void* ptr) {
+	return free(ptr);
+}
 
 struct csds_slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
 	struct csds_slice* slice;
