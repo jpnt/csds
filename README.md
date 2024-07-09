@@ -20,18 +20,18 @@ solid foundation for building various applications.
   - Embeddable list header to put inside other structures, creating a doubly linked list.
   - Suitable for implementing a stack or queue.
 
+- [ ] **csds_rbuf.h** (Circular Array / Ring Buffer)
+  - Contiguous block of memory to emulate a wrap-around in memory as if it was circular.
+
 ### Maps:
 
 - [ ] **csds_hash.h** (Hash Table)
   - Used to store key-value pairs and do fast lookups.
 
-- [ ] **csds_treemap.h** (Balanced Binary Search Tree)
-
 ### Trees:
 
-- [ ] **csds_rbtree.h** (Red-Black Tree)
-
-- [ ] **csds_avltree.h** (AVL Tree)
+- [ ] **csds_treemap.h** (Balanced Binary Search Tree)
+  - Red-black tree that supports insertion, deletion and look-up in O(logN) time.
 
 ### Miscellaneous:
 
@@ -42,6 +42,7 @@ useful are were designed to work outside of csds.
   - Intended to use with another types or data.
 
 - [ ] **csds_bheap.h** (Binary Heap)
+  - Complete binary tree used to store data efficiently to get the max or min item.
   - Suitable for implementing a priority queue.
 
 - [x] **csds_femtotest.h** (Unit Testing Framework)
@@ -51,9 +52,6 @@ useful are were designed to work outside of csds.
 - [x] **csds_error.h** (Error Handling Support)
   - Provide more robust error handling support, all functions return a integer
     which then is treated by the handle_error() function however you want.
-
-- [ ] **csds_leakcheck.h** (Memory Debugging)
-  - Track allocations, detect leaks, double frees and print memory report.
 
 ## Non-Goals
 
