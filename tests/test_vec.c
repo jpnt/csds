@@ -1,57 +1,105 @@
-#include "../include/csds/vec.h"
-#include <assert.h>
-/* #include <stdio.h> */
+#include "../include/csds_vec.h"
+#include "../include/csds_femtotest.h"
 
-int main() {
+void test_alloc_dealloc(void)
+{
+	struct csds_vec_header* vhead;
+	int* v_int = NULL;
 
-	Vec* vec = vec_alloc(10);
-	assert(vec->capacity == 10);
+	ASSERT_EQUALS(sizeof(v_int[0]), sizeof(int));
 
-	/* Use as a stack */
+	vec_alloc((void**)&v_int, sizeof(v_int[0]), 10);
 
-	vec_push(vec, (__V_ITEM_TYPE)0x1);
-	vec_push(vec, (__V_ITEM_TYPE)0x2);
-	vec_push(vec, (__V_ITEM_TYPE)0x3);
-	vec_push(vec, (__V_ITEM_TYPE)0x4);
-	assert(vec->len == 4);
+	ASSERT(v_int != NULL, "Failed to alloc memory");
 
-	assert(vec->items[0] == (__V_ITEM_TYPE)0x1);
-	assert(vec->items[1] == (__V_ITEM_TYPE)0x2);
-	assert(vec->items[2] == (__V_ITEM_TYPE)0x3);
-	assert(vec->items[3] == (__V_ITEM_TYPE)0x4);
+        vhead = VEC_HEADER_OF(v_int);
 
-	assert(vec_pop(vec) == (__V_ITEM_TYPE)0x4);
-	assert(vec_pop(vec) == (__V_ITEM_TYPE)0x3);
-	assert(vec_pop(vec) == (__V_ITEM_TYPE)0x2);
-	assert(vec_pop(vec) == (__V_ITEM_TYPE)0x1);
+	/* printf("vhead = 0x%p\n", (void*)vhead); */
+	/* printf("v_int = 0x%p\n", (void*)v_int); */
 
-	assert(vec->len == 0);
+	ASSERT_EQUALS((char*)v_int-sizeof(struct csds_vec_header), (char*)vhead);
 
+        ASSERT_EQUALS(vhead->cap, 10);
 
-	/* Use as a queue */
+	/* Will free both vhead and v_int */
+	vec_dealloc(v_int);
+}
 
-	vec_push(vec, (__V_ITEM_TYPE)0x2);
-	vec_push(vec, (__V_ITEM_TYPE)0x4);
-	vec_push(vec, (__V_ITEM_TYPE)0x8);
+void test_insert_remove(void)
+{
+	struct csds_vec_header* vhead;
+	int* v_int = NULL;
+	int value = 761276891;
+	int old_value = value;
+	int removed;
+
+	/* Handling errors example, see csds_error.{h,c} */
+	HANDLE_ERROR(vec_alloc((void**)&v_int, sizeof(v_int[0]), 0));
+
+	vhead = VEC_HEADER_OF(v_int);
+
+	ASSERT_EQUALS(vhead->cap, CSDS_VEC_INITIAL_CAP);
+
+	vec_insert(v_int, 0, &value);
+	ASSERT_EQUALS(v_int[0], value);
+
+	/* Store the value, not the pointer to it */
+	value = 11;
+	ASSERT_EQUALS(v_int[0], old_value);
+	value = old_value;
+
+	vec_remove(v_int, 0, &removed);
+	ASSERT_EQUALS(removed, value);
+
+	vec_dealloc(v_int);
+}
+
+void test_push_pop(void)
+{
+	int* v_int = NULL;
+	int value = 991278;
+	int old_value = value;
+
+	/* Explicit allocation, always */
+	vec_alloc((void**)&v_int, sizeof(int), 0);
+
+	vec_push(v_int, &value);
+
+	value = 11;
+	ASSERT_EQUALS(v_int[0], old_value);
 	
-	assert(vec_remove(vec, 0) == (__V_ITEM_TYPE)0x2);
-	assert(vec_remove(vec, 0) == (__V_ITEM_TYPE)0x4);
-	assert(vec_remove(vec, 0) == (__V_ITEM_TYPE)0x8);
+	vec_pop(v_int, &value);
+	ASSERT_EQUALS(value, old_value);
+}
 
+void test_growth(void)
+{
+	VecHeader* vhead;
+	int* v_int = NULL;
+	int value = 123;
 
-	/* Item insertion */
-	vec_insert(vec, 4, (__V_ITEM_TYPE)0x9);
-	assert(vec->items[4] == (__V_ITEM_TYPE)0x9);
+	vec_alloc((void**)&v_int, sizeof(int), 1);
 
+	vhead = VEC_HEADER_OF(v_int);
 
-	/* Dynamic grow */
-	vec_insert(vec, 10, (__V_ITEM_TYPE)0xA);
-	assert(vec->capacity > 10); /* new capacity depends on growth factor */
-	/* printf("vec->capacity = %zu\n",vec->capacity); */
+	vec_push(v_int, &value);
+	ASSERT_EQUALS(vhead->cap, 1);
+	ASSERT_EQUALS(v_int[0], value);
 
+	vec_push(v_int, &value);
+	ASSERT(vhead->cap > 1, "Vec capacity should grow");
+	/* printf("vhead->cap=%ld\n", vhead->cap); */
+	ASSERT_EQUALS(v_int[1], value);
 
-	/* Free memory */
-	vec_dealloc(vec);
+	vec_dealloc(v_int);
+}
 
-	return 0;
+int main(void)
+{
+	TEST_RUN(test_alloc_dealloc, "test_alloc_dealloc");
+	TEST_RUN(test_insert_remove, "test_insert_remove");
+	TEST_RUN(test_push_pop, "test_push_pop");
+	TEST_RUN(test_growth, "test_growth");
+
+	TEST_REPORT();
 }

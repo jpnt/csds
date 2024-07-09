@@ -1,5 +1,5 @@
-#include "../include/csds/slice.h"
-#include "../csds_femtotest.h"
+#include "../include/csds_slice.h"
+#include "../include/csds_femtotest.h"
 #include <stdlib.h>
 
 /* Slice in the heap */

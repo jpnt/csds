@@ -1,5 +1,4 @@
-#include "../csds_femtotest.h"
-#include <stdio.h>
+#include "../include/csds_femtotest.h"
 
 void test1() {
 	ASSERT(1 == 1, "should not fail");

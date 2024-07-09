@@ -3,44 +3,59 @@
 ## Overview
 
 **csds** is a ANSI C/ISO C90 library focused on providing simple implementations
-of basic and fundamental data structures. 
+of basic and fundamental data structures.
 
-Designed with clarity and ease of use in mind, this library aims to serve as a 
+Designed with clarity and ease of use in mind, this library aims to serve as a
 solid foundation for building various applications.
+
+For usage, consult the (./tests/)[tests].
 
 ## Data Structures
 
 ### Sequences:
 
-- [x] **Vec** (Dynamic Array)
-  - Growable dynamic array, with configurable growth factor and item type
+- [x] **csds_vec.h** (Dynamic Array)
+  - Growable dynamic array that can store any data type.
+  - Uses 'hidden' header to keep track of the capacity and length of the vector.
 
-- [x] **List** (Doubly Linked List)
-  - Suitable for implementing a stack or queue
+- [ ] **csds_list.h** (Doubly Linked List)
+  - Embeddable list header to put inside other structures, creating a doubly linked list.
+  - Suitable for implementing a stack or queue.
 
 ### Maps:
 
-- [ ] **HashMap** (Hash Table)
-  - Used to store key-value pairs and do fast lookups
+- [ ] **csds_hash.h** (Hash Table)
+  - Used to store key-value pairs and do fast lookups.
 
-- [ ] **TreeMap** (Balanced Binary Search Tree)
+- [ ] **csds_treemap.h** (Balanced Binary Search Tree)
 
 ### Trees:
 
-- [ ] **Rbt** (Red-Black Tree)
+- [ ] **csds_rbtree.h** (Red-Black Tree)
 
-- [ ] **Avl** (AVL Tree)
+- [ ] **csds_avltree.h** (AVL Tree)
 
 ### Miscellaneous:
 
-- [x] **Slice** (Pointer + a Length)
-  - Intended to use with another types or data
+Some of this files do not even contain structures but are still very
+useful are were designed to work outside of csds.
 
-- [ ] **MemDebug** (Memory Debugging)
-  - Track allocations, detect leaks, double frees and print memory report
+- [x] **csds_slice.h** (Pointer + a Length)
+  - Intended to use with another types or data.
 
-- [ ] **Heap** (Binary Heap)
-  - Suitable for implementing a priority queue
+- [ ] **csds_bheap.h** (Binary Heap)
+  - Suitable for implementing a priority queue.
+
+- [x] **csds_femtotest.h** (Unit Testing Framework)
+  - Intended to be the smallest possible "framework" for testing C applications.
+  - Used in all tests of this project.
+
+- [x] **csds_error.h** (Error Handling Support)
+  - Provide more robust error handling support, all functions return a integer
+    which then is treated by the handle_error() function however you want.
+
+- [ ] **csds_leakcheck.h** (Memory Debugging)
+  - Track allocations, detect leaks, double frees and print memory report.
 
 ## Non-Goals
 
@@ -51,6 +66,10 @@ solid foundation for building various applications.
 - No "set" functions
 
 - No support for niche features
+
+- No hidden control flow
+
+- Excessive usage of macros
 
 ## Goals
 

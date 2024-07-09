@@ -1,12 +1,11 @@
 #include "../include/csds/debug.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 DebugMem debug_mem_arr[__D_MAX_ALLOCATIONS];
 uint debug_mem_arr_len = 0;
 size_t bytes_allocated = 0;
-size_t bytes_deallocted = 0;
+size_t bytes_deallocated = 0;
 /* mutex for concurrent programming */
 void* debug_mem_mutex = NULL;
 int (*debug_mem_mutex_lock)(void* mutex) = NULL;
@@ -39,11 +38,11 @@ void* debug_mem_malloc(size_t size, const char* file, uint line) {
 			debug_exit_abort(1);
 		}
 	}
-
-	if (debug_mem_init(debug_mem_arr_len, ptr, size, 0, file, NULL, line, 0) == -1) {
-		free(ptr);
-		debug_exit_abort(2);
-	}
+	/*  */
+	/* if (debug_mem_init(debug_mem_arr_len, ptr, size, 0, file, NULL, line, 0) == -1) { */
+	/* 	free(ptr); */
+	/* 	debug_exit_abort(2); */
+	/* } */
 
 	debug_mem_arr_len+=1;
 
@@ -77,11 +76,11 @@ void debug_mem_free(void* ptr, const char* file, uint line) {
 	}
 
 	/* fill dealloc_file and dealloc_line parameters in the alloc debug_mem struct to reference the dealloc struct */
-	debug_mem_init(i, NULL, 0, 0, NULL, file, 0, line);
+	/* debug_mem_init(i, NULL, 0, 0, NULL, file, 0, line); */
 
 	/* fill the dealloc debug_mem entry */
-	debug_mem_init(debug_mem_arr_len, (void*)__D_MAGIC_NUMBER, 0, alloc_size, alloc_file, file, alloc_line, line);
-	debug_mem_arr_len+=1;
+	/* debug_mem_init(debug_mem_arr_len, (void*)__D_MAGIC_NUMBER, 0, alloc_size, alloc_file, file, alloc_line, line); */
+	/* debug_mem_arr_len+=1; */
 
 #ifdef __D_MEMORY_DEBUG_FULL
 	printf("(DEBUG) debug_mem_free: Deallocating %u bytes at %p (%s:%u)\n", (uint)alloc_size, ptr, file, line);
@@ -110,16 +109,16 @@ int debug_mem_query(void* ptr, uint* debug_mem_arr_idx, uint* line, char* file, 
 			if (debug_mem_arr_idx != NULL) {
 				*debug_mem_arr_idx = i;
 			}
-			if (line != NULL) {
-				*line = debug_mem_arr[i].alloc_line;
-			}
+			/* if (line != NULL) { */
+			/* 	*line = debug_mem_arr[i].alloc_line; */
+			/* } */
 			if (file != NULL) {
-				strncpy(file, debug_mem_arr[i].alloc_file, sizeof(debug_mem_arr[i].alloc_file)-1);
-				debug_mem_arr[i].alloc_file[sizeof(debug_mem_arr[i].alloc_file)-1] = '\0';
+				/* strncpy(file, debug_mem_arr[i].alloc_file, sizeof(debug_mem_arr[i].alloc_file)-1); */
+				/* debug_mem_arr[i].alloc_file[sizeof(debug_mem_arr[i].alloc_file)-1] = '\0'; */
 			}
 			if (size != NULL) {
 				/* one of them will be zero, so just sum them up */
-				*size = debug_mem_arr[i].alloc_size + debug_mem_arr[i].dealloc_size;
+				/* *size = debug_mem_arr[i].alloc_size + debug_mem_arr[i].dealloc_size; */
 			}
 			if (debug_mem_mutex != NULL) {
 				debug_mem_mutex_unlock(debug_mem_mutex);
@@ -140,45 +139,45 @@ int debug_mem_query(void* ptr, uint* debug_mem_arr_idx, uint* line, char* file, 
 /* //TODO */
 int debug_mem_check(void);
 
-int debug_mem_init(uint debug_mem_arr_idx, void* ptr, size_t alloc_size, size_t dealloc_size,
-		const char* alloc_file, const char* dealloc_file, uint alloc_line, uint dealloc_line) {
-	DebugMem* debug_mem;
-
-	if (debug_mem_arr_idx >= __D_MAX_ALLOCATIONS) {
-		fprintf(stderr, "(ERROR) debug_mem_init: Exceeded maximum number of allocations (%d)\n",
-				__D_MAX_ALLOCATIONS);
-		return -1;
-	}
-
-	debug_mem = &debug_mem_arr[debug_mem_arr_idx];
-
-	if (ptr != NULL) {
-		debug_mem->ptr = ptr;
-	}
-	if (alloc_file != NULL) {
-		debug_mem_strncpy(debug_mem->alloc_file, alloc_file, sizeof(debug_mem->alloc_file) - 1);
-	}
-	if (dealloc_file != NULL) {
-		debug_mem_strncpy(debug_mem->dealloc_file, dealloc_file, sizeof(debug_mem->dealloc_file) - 1);
-	}
-	if (alloc_size != 0) {
-		debug_mem->alloc_size = alloc_size;
-		bytes_allocated+=alloc_size;
-	}
-	if (dealloc_size != 0) {
-		debug_mem->dealloc_size = dealloc_size;
-		bytes_deallocted+=dealloc_size;
-	}
-	if (alloc_line != 0) {
-		debug_mem->alloc_line = alloc_line;
-	}
-	if (dealloc_line != 0) {
-		debug_mem->dealloc_line = dealloc_line;
-	}
-
-	/* debug_mem_arr_len is incremented separately */
-	return 0;
-}
+/* int debug_mem_init(uint debug_mem_arr_idx, void* ptr, size_t alloc_size, size_t dealloc_size, */
+/* 		const char* alloc_file, const char* dealloc_file, uint alloc_line, uint dealloc_line) { */
+/* 	DebugMem* debug_mem; */
+/*  */
+/* 	if (debug_mem_arr_idx >= __D_MAX_ALLOCATIONS) { */
+/* 		fprintf(stderr, "(ERROR) debug_mem_init: Exceeded maximum number of allocations (%d)\n", */
+/* 				__D_MAX_ALLOCATIONS); */
+/* 		return -1; */
+/* 	} */
+/*  */
+/* 	debug_mem = &debug_mem_arr[debug_mem_arr_idx]; */
+/*  */
+/* 	if (ptr != NULL) { */
+/* 		debug_mem->ptr = ptr; */
+/* 	} */
+/* 	if (alloc_file != NULL) { */
+/* 		debug_mem_strncpy(debug_mem->alloc_file, alloc_file, sizeof(debug_mem->alloc_file) - 1); */
+/* 	} */
+/* 	if (dealloc_file != NULL) { */
+/* 		debug_mem_strncpy(debug_mem->dealloc_file, dealloc_file, sizeof(debug_mem->dealloc_file) - 1); */
+/* 	} */
+/* 	if (alloc_size != 0) { */
+/* 		debug_mem->alloc_size = alloc_size; */
+/* 		bytes_allocated+=alloc_size; */
+/* 	} */
+/* 	if (dealloc_size != 0) { */
+/* 		debug_mem->dealloc_size = dealloc_size; */
+/* 		bytes_deallocted+=dealloc_size; */
+/* 	} */
+/* 	if (alloc_line != 0) { */
+/* 		debug_mem->alloc_line = alloc_line; */
+/* 	} */
+/* 	if (dealloc_line != 0) { */
+/* 		debug_mem->dealloc_line = dealloc_line; */
+/* 	} */
+/*  */
+ 	/* debug_mem_arr_len is incremented separately */ 
+/* 	return 0; */
+/* } */
 
 char* debug_mem_strncpy(char* dest, const char* src, size_t dest_size) {
 	char* ret;

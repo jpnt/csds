@@ -1,6 +1,6 @@
 /**
  * @file	csds_femtotest.h
- * @brief	Small-as-possible, no-hassle ANSI C unit-testing framework
+ * @brief	Small-as-possible, no-hassle, single-header ANSI C unit-testing "framework"
  * 		Based on 'tinytest.h´ by Joe Walnes and 'minctest.h´ by Lewis Van Winkle
  */
 #ifndef CSDS_FEMTOTEST_H
