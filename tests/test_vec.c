@@ -1,7 +1,7 @@
 #include "../include/csds_vec.h"
 #include "../include/csds_femtotest.h"
 
-void test_alloc_dealloc(void)
+void test_vec_alloc_dealloc(void)
 {
 	struct csds_vec_header* vhead;
 	int* v_int = NULL;
@@ -25,7 +25,7 @@ void test_alloc_dealloc(void)
 	vec_dealloc(v_int);
 }
 
-void test_insert_remove(void)
+void test_vec_insert_remove(void)
 {
 	struct csds_vec_header* vhead;
 	int* v_int = NULL;
@@ -54,7 +54,7 @@ void test_insert_remove(void)
 	vec_dealloc(v_int);
 }
 
-void test_push_pop(void)
+void test_vec_push_pop(void)
 {
 	int* v_int = NULL;
 	int value = 991278;
@@ -72,9 +72,9 @@ void test_push_pop(void)
 	ASSERT_EQUALS(value, old_value);
 }
 
-void test_growth(void)
+void test_vec_growth(void)
 {
-	VecHeader* vhead;
+	struct csds_vec_header* vhead;
 	int* v_int = NULL;
 	int value = 123;
 
@@ -94,12 +94,80 @@ void test_growth(void)
 	vec_dealloc(v_int);
 }
 
+void test_vec_use_as_stack(void)
+{
+	struct csds_vec_header* vhead;
+	int value_in, value_out;
+
+	int* v_int = NULL;
+	vec_alloc((void**)&v_int, sizeof(int), 3);
+
+	/* To use as a stack, use vec_push and vec_pop */
+
+	/* Values are memcpy'ed */
+	value_in = 10;
+	vec_push(v_int, &value_in);
+	value_in = 20;
+	vec_push(v_int, &value_in);
+	value_in = 30;
+	vec_push(v_int, &value_in);
+
+	vhead = VEC_HEADER_OF(v_int);
+	ASSERT_EQUALS(vhead->len, 3);
+	ASSERT_EQUALS(vhead->cap, 3);
+
+	/* Remove them and copy to value_out */
+	vec_pop(v_int, &value_out);
+	ASSERT_EQUALS(value_out, 30);
+
+	vec_pop(v_int, &value_out);
+	ASSERT_EQUALS(value_out, 20);
+
+	vec_pop(v_int, &value_out);
+	ASSERT_EQUALS(value_out, 10);
+}
+
+void test_vec_use_as_fifo(void)
+{
+	struct csds_vec_header* vhead;
+	int value_in, value_out;
+
+	int* v_int = NULL;
+	vec_alloc((void**)&v_int, sizeof(int), 3);
+
+	/* To use as a FIFO queue, use vec_push and vec_remove(,item_idx=0,) */
+
+	/* Values are memcpy'ed */
+	value_in = 10;
+	vec_push(v_int, &value_in);
+	value_in = 20;
+	vec_push(v_int, &value_in);
+	value_in = 30;
+	vec_push(v_int, &value_in);
+
+	vhead = VEC_HEADER_OF(v_int);
+	ASSERT_EQUALS(vhead->len, 3);
+	ASSERT_EQUALS(vhead->cap, 3);
+
+	/* Remove them and copy to value_out */
+	vec_remove(v_int, 0, &value_out);
+	ASSERT_EQUALS(value_out, 10);
+
+	vec_remove(v_int, 0, &value_out);
+	ASSERT_EQUALS(value_out, 20);
+
+	vec_remove(v_int, 0, &value_out);
+	ASSERT_EQUALS(value_out, 30);
+}
+
 int main(void)
 {
-	TEST_RUN(test_alloc_dealloc, "test_alloc_dealloc");
-	TEST_RUN(test_insert_remove, "test_insert_remove");
-	TEST_RUN(test_push_pop, "test_push_pop");
-	TEST_RUN(test_growth, "test_growth");
+	TEST_RUN(test_vec_alloc_dealloc, "test_vec_alloc_dealloc");
+	TEST_RUN(test_vec_insert_remove, "test_vec_insert_remove");
+	TEST_RUN(test_vec_push_pop, "test_vec_push_pop");
+	TEST_RUN(test_vec_growth, "test_vec_growth");
+	TEST_RUN(test_vec_use_as_stack, "test_vec_use_as_stack");
+	TEST_RUN(test_vec_use_as_fifo, "test_vec_use_as_fifo");
 
 	TEST_REPORT();
 }
