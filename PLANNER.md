@@ -58,6 +58,8 @@ Like:
 
 * snprintf (C99)
 
+* %zu size_t formatter (C99)
+
 Dislike:
 
 * variable length arrays (C99)
