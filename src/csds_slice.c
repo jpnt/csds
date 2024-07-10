@@ -6,7 +6,7 @@ void* CSDS_SLICE_ALLOC(size_t size) {
 }
 
 void CSDS_SLICE_DEALLOC(void* ptr) {
-	return free(ptr);
+	free(ptr);
 }
 
 struct csds_slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_idx) {
