@@ -14,11 +14,11 @@ struct csds_slice {
 };
 
 /* Allocate a new slice */
-extern struct csds_slice* slice_alloc(void* addr, size_t type_size, size_t start, size_t end);
+extern struct csds_slice* slice_alloc(void* addr, size_t type_size, size_t start_idx, size_t end_idx);
 /* Free memory allocated for the slice */
 extern void slice_dealloc(struct csds_slice* slice);
 /* Sets/Initializes slice values */
-extern int slice_init(struct csds_slice* slice, void* addr, size_t type_size, size_t start, size_t end);
+extern int slice_init(struct csds_slice* slice, void* addr, size_t type_size, size_t start_idx, size_t end_idx);
 /* Returns the value at the specified index in the slice */
 extern void* slice_valueat(struct csds_slice* slice, size_t idx);
 

@@ -21,7 +21,12 @@ TEST_EXES = $(patsubst $(TESTS_DIR)/%.c,$(BUILD_DIR)/tests/%,$(TEST_SRCS))
 VALGRIND = valgrind
 VALGRIND_FLAGS = --leak-check=full --track-origins=yes --show-reachable=yes -s
 
-.PHONY: all clean test valgrind
+# Cppcheck flags
+CPPCHECK = cppcheck
+CPPCHECK_FLAGS = --enable=all --inconclusive --std=c90 --error-exitcode=1 \
+		 --suppress=missingIncludeSystem  --check-level=exhaustive -Iinclude
+
+.PHONY: all clean test valgrind cppcheck
 
 all: $(BUILD_DIR) $(OBJS)
 
@@ -36,6 +41,9 @@ valgrind: $(BUILD_DIR) $(OBJS) $(TEST_EXES)
 
 $(BUILD_DIR)/tests/%: $(TESTS_DIR)/%.c $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $< -o $@
+
+cppcheck:
+	$(CPPCHECK) $(CPPCHECK_FLAGS) $(SRC_DIR) $(TESTS_DIR)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)/tests
