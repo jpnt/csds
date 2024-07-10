@@ -15,6 +15,7 @@ solid foundation for building various applications.
 - [x] **csds_vec.h** (Dynamic Array)
   - Growable dynamic array that can store any data type.
   - Uses 'hidden' header to keep track of the capacity and length of the vector.
+  - Can also be used as a stack or queue.
 
 - [ ] **csds_list.h** (Doubly Linked List)
   - Embeddable list header to put inside other structures, creating a doubly linked list.
@@ -33,17 +34,19 @@ solid foundation for building various applications.
 - [ ] **csds_treemap.h** (Balanced Binary Search Tree)
   - Red-black tree that supports insertion, deletion and look-up in O(logN) time.
 
-### Miscellaneous:
-
-Some of this files do not even contain structures but are still very
-useful are were designed to work outside of csds.
-
-- [x] **csds_slice.h** (Pointer + a Length)
-  - Intended to use with another types or data.
-
 - [ ] **csds_bheap.h** (Binary Heap)
   - Complete binary tree used to store data efficiently to get the max or min item.
   - Suitable for implementing a priority queue.
+
+### Miscellaneous:
+
+Some of this files do not even contain structures but are still very
+useful and were designed to work outside of csds.
+
+- [x] **csds_slice.h** (Pointer + a Length)
+  - Provides a length attribute to a pointer to prevent out of bounds errors and
+    handles them properly.
+  - Intended to use with another types or data.
 
 - [x] **csds_femtotest.h** (Unit Testing Framework)
   - Intended to be the smallest possible "framework" for testing C applications.
