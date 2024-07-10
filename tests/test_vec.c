@@ -3,14 +3,13 @@
 
 void test_vec_alloc_dealloc(void)
 {
-	struct csds_vec_header* vhead;
+	/* Can also use: const VecHeader* vhead */
+	const struct csds_vec_header* vhead;
 	int* v_int = NULL;
 
 	ASSERT_EQUALS(sizeof(v_int[0]), sizeof(int));
 
 	vec_alloc((void**)&v_int, sizeof(v_int[0]), 10);
-
-	ASSERT(v_int != NULL, "Failed to alloc memory");
 
         vhead = VEC_HEADER_OF(v_int);
 
@@ -27,10 +26,9 @@ void test_vec_alloc_dealloc(void)
 
 void test_vec_insert_remove(void)
 {
-	struct csds_vec_header* vhead;
+	const struct csds_vec_header* vhead;
 	int* v_int = NULL;
 	int value = 761276891;
-	int old_value = value;
 	int removed;
 
 	/* Handling errors example, see csds_error.{h,c} */
@@ -44,9 +42,7 @@ void test_vec_insert_remove(void)
 	ASSERT_EQUALS(v_int[0], value);
 
 	/* Store the value, not the pointer to it */
-	value = 11;
-	ASSERT_EQUALS(v_int[0], old_value);
-	value = old_value;
+	ASSERT_EQUALS(v_int[0], value);
 
 	vec_remove(v_int, 0, &removed);
 	ASSERT_EQUALS(removed, value);
@@ -74,7 +70,7 @@ void test_vec_push_pop(void)
 
 void test_vec_growth(void)
 {
-	struct csds_vec_header* vhead;
+	const struct csds_vec_header* vhead;
 	int* v_int = NULL;
 	int value = 123;
 
@@ -96,7 +92,7 @@ void test_vec_growth(void)
 
 void test_vec_use_as_stack(void)
 {
-	struct csds_vec_header* vhead;
+	const struct csds_vec_header* vhead;
 	int value_in, value_out;
 
 	int* v_int = NULL;
@@ -129,7 +125,7 @@ void test_vec_use_as_stack(void)
 
 void test_vec_use_as_fifo(void)
 {
-	struct csds_vec_header* vhead;
+	const struct csds_vec_header* vhead;
 	int value_in, value_out;
 
 	int* v_int = NULL;

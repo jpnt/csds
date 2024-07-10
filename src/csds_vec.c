@@ -22,7 +22,7 @@ int vec_alloc(void** arr, size_t item_size, size_t init_cap)
 
 	if (arr == NULL) return CSDS_ERROR_VEC_ARR_NULL;
 
-	if (init_cap <= 0) init_cap = CSDS_VEC_INITIAL_CAP;
+	if (init_cap == 0) init_cap = CSDS_VEC_INITIAL_CAP;
 
 	vhead = CSDS_VEC_ALLOC(sizeof(struct csds_vec_header) + item_size * init_cap);
 	if (vhead == NULL) return CSDS_ERROR_VEC_MALLOC_FAILED;
@@ -151,7 +151,7 @@ int vec_remove(void* arr, size_t item_idx, void* removed)
 		return CSDS_ERROR_VEC_OUT_OF_BOUNDS;
 	}
 
-	if (vhead->len <= 0) {
+	if (vhead->len == 0) {
 		/* Unlock */
 		if (mutex_unlock != NULL) mutex_unlock(&mutex);
 		return CSDS_ERROR_VEC_EMPTY;
@@ -189,7 +189,7 @@ int vec_remove(void* arr, size_t item_idx, void* removed)
 
 int vec_push(void* arr, const void* item)
 {
-	struct csds_vec_header* vhead;
+	const struct csds_vec_header* vhead;
 	int result;
 
 	if (arr == NULL) return CSDS_ERROR_VEC_ARR_NULL;
@@ -213,7 +213,7 @@ int vec_push(void* arr, const void* item)
 
 int vec_pop(void* arr, void* popped)
 {
-	struct csds_vec_header* vhead;
+	const struct csds_vec_header* vhead;
 	int result;
 
 	if (arr == NULL) return CSDS_ERROR_VEC_ARR_NULL;
