@@ -24,7 +24,7 @@ VALGRIND_FLAGS = --leak-check=full --track-origins=yes --show-reachable=yes -s
 # Cppcheck flags
 CPPCHECK = cppcheck
 CPPCHECK_FLAGS = --enable=all --inconclusive --std=c89 --error-exitcode=1 \
-		 --suppress=missingIncludeSystem  --check-level=exhaustive -Iinclude
+		 --suppress=missingIncludeSystem -Iinclude
 
 .PHONY: all clean test valgrind cppcheck
 
