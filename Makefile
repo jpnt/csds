@@ -1,8 +1,8 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -g -Wall -Wextra -fanalyzer -std=c90 -pedantic -Iinclude
+CFLAGS = -g -Wall -Wextra -fanalyzer -std=c89 -pedantic -Iinclude
 # CC = clang
-# CFLAGS = -g -Wall -Wextra -Xanalyzer -std=c90 -pedantic -Iinclude
+# CFLAGS = -g -Wall -Wextra -Xanalyzer -std=c89 -pedantic -Iinclude
 
 # Directories
 BUILD_DIR = build
@@ -23,7 +23,7 @@ VALGRIND_FLAGS = --leak-check=full --track-origins=yes --show-reachable=yes -s
 
 # Cppcheck flags
 CPPCHECK = cppcheck
-CPPCHECK_FLAGS = --enable=all --inconclusive --std=c90 --error-exitcode=1 \
+CPPCHECK_FLAGS = --enable=all --inconclusive --std=c89 --error-exitcode=1 \
 		 --suppress=missingIncludeSystem  --check-level=exhaustive -Iinclude
 
 .PHONY: all clean test valgrind cppcheck

@@ -20,14 +20,11 @@ jobs:
     - name: Build
       run: make
 
-    - name: Run Cppcheck
-      continue-on-error: true
-      run: make cppcheck
-
     - name: Run tests
-      continue-on-error: true
       run: make test
 
     - name: Run Valgrind
-      continue-on-error: true
       run: make valgrind
+
+    - name: Run Cppcheck
+      run: make cppcheck
