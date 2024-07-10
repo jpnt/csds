@@ -1,6 +1,6 @@
 #include "../include/csds_femtotest.h"
 
-void test1() {
+void test1(void) {
 	ASSERT(1 == 1, "should not fail");
 
 	ASSERT_EQUALS(1,1);
@@ -11,13 +11,13 @@ void test1() {
 }
 
 
-void test2() {
+void test2(void) {
 	ASSERT_FLOAT_EQUALS(10.0, 10.001);
 
 	/* ASSERT_STR_EQUALS("asd", "ad"); */
 }
 
-int main()
+int main(void)
 {
 	TEST_RUN(test1, "test1 of csds_femtotest");
 	TEST_RUN(test2, "test2 of csds_femtotest");

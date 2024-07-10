@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 /* Slice in the heap */
-void test_slice_heap()
+void test_slice_heap(void)
 {
 	Slice* slice;
 	char str[] = "address + type + length";
@@ -26,7 +26,7 @@ void test_slice_heap()
 }
 
 /* Slice in the stack */
-void test_slice_stack()
+void test_slice_stack(void)
 {
 	Slice slice;
 	int arr[] = {1,2,3,4,5,6,7};
@@ -56,7 +56,7 @@ void test_slice_stack()
 	ASSERT_EQUALS(oobs, 6);
 }
 
-int main()
+int main(void)
 {
 	TEST_RUN(test_slice_heap, "test_slice_heap");
 	TEST_RUN(test_slice_stack, "test_slice_stack");
