@@ -71,7 +71,8 @@ int slice_init(struct csds_slice* slice, void* addr, size_t type_size, size_t st
 void* slice_valueat(struct csds_slice* slice, size_t idx) {
 	/* Handle if out of bounds */
 	if (idx >= slice->len) {
-		fprintf(stderr, "(WARN) slice_valueat: index %lu out of bounds for slice of length %lu\n",
+		fprintf(stderr, "(WARN) slice_valueat: index %" PRIuPTR
+				" out of bounds for slice of length %" PRIuPTR"\n",
 				idx, slice->len);
 		return (char*)slice->addr + (slice->len - 1) * slice->type_size;
 	}

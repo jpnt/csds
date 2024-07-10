@@ -1,9 +1,9 @@
 #ifndef CSDS_SLICE_H
 #define CSDS_SLICE_H
 
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h>	/* fprintf */
+#include <stdlib.h>	/* malloc, free */
+#include <inttypes.h>	/* for printing size_t to the screen */
 
 typedef struct csds_slice Slice;
 
