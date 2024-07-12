@@ -70,7 +70,9 @@ int vec_grow(void** arr)
 	new_cap = vhead->cap * CSDS_VEC_GROWTH_FACTOR + 1;
 	new_size = (sizeof(struct csds_vec_header) + new_cap * vhead->item_size);
 
+	printf("vec_grow: address before: %p\n", (void*)vhead);
 	vhead = CSDS_VEC_REALLOC(vhead, new_size);
+	printf("vec_grow: address after: %p\n", (void*)vhead);
 	if (vhead == NULL) {
 		/* Unlock */
 		if (mutex_unlock != NULL) mutex_unlock(&mutex);
@@ -130,7 +132,7 @@ int vec_remove(void* arr, size_t item_idx, void* removed)
 {
 	struct csds_vec_header* vhead;
 	int value_after = 0xDEADBEEF;
-	size_t i, cap, item_size, limit;
+	size_t i, len, item_size, limit;
 
 	if (arr == NULL) return CSDS_ERROR_VEC_ARR_NULL;
 
@@ -165,8 +167,8 @@ int vec_remove(void* arr, size_t item_idx, void* removed)
 
 	/* Move items left after remove */
 	item_size = vhead->item_size;
-	cap = vhead->cap;
-	limit = cap - 1;
+	len = vhead->len;
+	limit = len - 1;
 	for (i=item_idx; i<limit; i+=2) {
 		memcpy((char*)arr + i * item_size,
 			(char*)arr + (i+1) * item_size, item_size);
@@ -174,7 +176,7 @@ int vec_remove(void* arr, size_t item_idx, void* removed)
 		memcpy((char*)arr + (i+1) * item_size,
 			(char*)arr + (i+2) * item_size, item_size);
 	}
-	for (;i<cap;i++) {
+	for (;i<len;i++) {
 		memcpy((char*)arr + i * item_size,
 			(char*)arr + (i+1) * item_size, item_size);
 	}

@@ -82,7 +82,16 @@ void test_vec_growth(void)
 	ASSERT_EQUALS(vhead->cap, 1);
 	ASSERT_EQUALS(v_int[0], value);
 
-	vec_push(v_int, &value);
+	/* TODO: PROBLEM: address does not change? giving memleaks/errors in valgrind */
+	printf("address of vec before: %p\n", (void*)v_int);
+	printf("address of vhead before: %p\n", (void*)vhead);
+	HANDLE_ERROR(vec_push(v_int, &value));
+	/* Capacity grows... */
+	/* WARNING! Address of vhead will change, so make sure to fetch it again */
+	vhead = VEC_HEADER_OF(v_int);
+	printf("address of vec after: %p\n", (void*)v_int);
+	printf("address of vhead after: %p\n", (void*)vhead);
+
 	ASSERT(vhead->cap > 1, "Vec capacity should grow");
 	/* printf("vhead->cap=%ld\n", vhead->cap); */
 	ASSERT_EQUALS(v_int[1], value);

@@ -1,4 +1,4 @@
-#include "../include/csds/vec.h"
+#include "../include/vec.h"
 #include <stdio.h>
 #include <stdlib.h>
 
