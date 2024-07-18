@@ -131,8 +131,9 @@ int vec_insert(void* arr, size_t item_idx, const void* item)
 int vec_remove(void* arr, size_t item_idx, void* removed)
 {
 	struct csds_vec_header* vhead;
-	int value_after = 0xDEADBEEF;
-	size_t i, len, item_size, limit;
+	/* int value_after = 0xDEADBEEF; */
+	/* size_t i, len, item_size, limit; */
+	size_t item_size, len;
 
 	if (arr == NULL) return CSDS_ERROR_VEC_ARR_NULL;
 
@@ -159,26 +160,18 @@ int vec_remove(void* arr, size_t item_idx, void* removed)
 		return CSDS_ERROR_VEC_EMPTY;
 	}
 
-	if (removed != NULL) {
-		memcpy(removed, (char*)arr + item_idx * vhead->item_size, vhead->item_size);
-	}
-
-	memcpy((char*)arr + item_idx * vhead->item_size, &value_after, vhead->item_size);
-
-	/* Move items left after remove */
 	item_size = vhead->item_size;
 	len = vhead->len;
-	limit = len - 1;
-	for (i=item_idx; i<limit; i+=2) {
-		memcpy((char*)arr + i * item_size,
-			(char*)arr + (i+1) * item_size, item_size);
 
-		memcpy((char*)arr + (i+1) * item_size,
-			(char*)arr + (i+2) * item_size, item_size);
+	if (removed != NULL) {
+		memcpy(removed, (char*)arr + item_idx * item_size, item_size);
 	}
-	for (;i<len;i++) {
-		memcpy((char*)arr + i * item_size,
-			(char*)arr + (i+1) * item_size, item_size);
+
+	/* Move items left after remove */
+	if (item_idx < len - 1) {
+		memmove((char*)arr + item_idx * item_size,
+			(char*)arr + (item_idx + 1) * item_size,
+			(len - item_idx - 1) * item_size);
 	}
 
 	vhead->len--;
