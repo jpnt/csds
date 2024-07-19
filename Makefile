@@ -1,8 +1,15 @@
 # Compiler and flags
+
+# DEBUG: GCC
 CC = gcc
 CFLAGS = -g -Wall -Wextra -fanalyzer -std=c89 -pedantic -Iinclude
+	 #-Wno-analyzer-imprecise-fp-arithmetic -Wno-analyzer-malloc-leak
+	 #-fuse-ld=mold
+
+# DEBUG: CLANG
 # CC = clang
 # CFLAGS = -g -Wall -Wextra -Xanalyzer -std=c89 -pedantic -Iinclude
+ 	 #-Wno-null-pointer-arithmetic -Wno-cmse-union-leak
 
 # Directories
 BUILD_DIR = build
