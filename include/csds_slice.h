@@ -5,6 +5,13 @@
 #include <stdlib.h>	/* malloc, free */
 #include <inttypes.h>	/* for printing size_t to the screen */
 
+#ifndef CSDS_SLICE_ALLOC
+#define CSDS_SLICE_ALLOC(size)		malloc(size);
+#endif /* !CSDS_SLICE_ALLOC */
+#ifndef CSDS_SLICE_DEALLOC
+#define CSDS_SLICE_DEALLOC(ptr)		free(ptr);
+#endif /* !CSDS_SLICE_DEALLOC */
+
 typedef struct csds_slice Slice;
 
 struct csds_slice {

@@ -70,7 +70,7 @@ void test_vec_push_pop(void)
 	vec_dealloc(v_int);
 }
 
-void test_vec_growth(void)
+void test_vec_grow(void)
 {
 	const struct csds_vec_header* vhead;
 	int* v_int = NULL;
@@ -95,7 +95,6 @@ void test_vec_growth(void)
 	printf("address of vhead after: %p\n", (void*)vhead);
 
 	ASSERT(vhead->cap > 1, "Vec capacity should grow"); /* valgrind: invalid read: this was freed */
-	printf("vhead->cap=%ld\n", vhead->cap);
 	ASSERT_EQUALS(v_int[1], value);
 
 	vec_dealloc(v_int);
@@ -176,8 +175,7 @@ int main(void)
 	TEST_RUN(test_vec_alloc_dealloc, "test_vec_alloc_dealloc");
 	TEST_RUN(test_vec_insert_remove, "test_vec_insert_remove");
 	TEST_RUN(test_vec_push_pop, "test_vec_push_pop");
-	/* TODO: giving memleaks in valgrind */
-	/* TEST_RUN(test_vec_growth, "test_vec_growth"); */
+	TEST_RUN(test_vec_grow, "test_vec_grow");
 	TEST_RUN(test_vec_use_as_stack, "test_vec_use_as_stack");
 	TEST_RUN(test_vec_use_as_fifo, "test_vec_use_as_fifo");
 

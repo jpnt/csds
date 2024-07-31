@@ -1,16 +1,5 @@
 #include "../include/csds_vec.h"
 
-/* Memory allocation configuration */
-void* CSDS_VEC_ALLOC(size_t size) {
-	return malloc(size);
-}
-void CSDS_VEC_DEALLOC(void* ptr) {
-	free(ptr);
-}
-void* CSDS_VEC_REALLOC(void* ptr, size_t new_size) {
-	return realloc(ptr, new_size);
-}
-
 /* Concurrent programming support, leave NULL to disable */
 void* mutex = NULL;
 int (*mutex_lock)(void* mutex) = NULL;
@@ -54,6 +43,7 @@ int vec_grow(void** arr)
 {
 	struct csds_vec_header* vhead;
 	size_t new_size, new_cap;
+	void* new_vec;
 
 	if (arr == NULL || *arr == NULL) return CSDS_ERROR_VEC_ARR_NULL;
 
@@ -70,17 +60,17 @@ int vec_grow(void** arr)
 	new_cap = vhead->cap * CSDS_VEC_GROWTH_FACTOR + 1;
 	new_size = (sizeof(struct csds_vec_header) + new_cap * vhead->item_size);
 
-	printf("vec_grow: address before: %p\n", (void*)vhead);
-	vhead = CSDS_VEC_REALLOC(vhead, new_size);
-	printf("vec_grow: address after: %p\n", (void*)vhead);
-	if (vhead == NULL) {
+	/* Reallocate memory */
+	new_vec = CSDS_VEC_REALLOC(vhead, new_size);
+	if (new_vec == NULL) {
 		/* Unlock */
 		if (mutex_unlock != NULL) mutex_unlock(&mutex);
 		return CSDS_ERROR_VEC_REALLOC_FAILED;
 	}
 
+	vhead = (struct csds_vec_header*)new_vec;
 	vhead->cap = new_cap;
-	*arr = (void*)(vhead+1);
+	*arr = (void*)(vhead + 1);
 
 	/* Unlock */
 	if (mutex_unlock != NULL) mutex_unlock(&mutex);

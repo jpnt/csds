@@ -15,6 +15,16 @@
 #define CSDS_ERROR_VEC_EMPTY		-16
 #endif /* !CSDS_ERROR_H */
 
+#ifndef CSDS_VEC_ALLOC
+#define CSDS_VEC_ALLOC(size)		malloc(size);
+#endif /* !CSDS_VEC_ALLOC */
+#ifndef CSDS_VEC_DEALLOC
+#define CSDS_VEC_DEALLOC(ptr)		free(ptr);
+#endif /* !CSDS_VEC_DEALLOC */
+#ifndef CSDS_VEC_REALLOC
+#define CSDS_VEC_REALLOC(ptr, size)	realloc(ptr, size);
+#endif /* !CSDS_VEC_REALLOC */
+
 #ifndef CSDS_VEC_INITIAL_CAP
 #define CSDS_VEC_INITIAL_CAP	16
 #endif /* !CSDS_VEC_INITIAL_CAP */
