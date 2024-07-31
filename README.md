@@ -10,7 +10,7 @@ solid foundation for building various applications.
 
 ## Data Structures
 
-### Sequences:
+### Sequence:
 
 - [x] **csds_vec.h** (Dynamic Array)
   - Growable dynamic array that can store any data type.
@@ -24,12 +24,15 @@ solid foundation for building various applications.
 - [ ] **csds_rbuf.h** (Circular Array / Ring Buffer)
   - Contiguous block of memory to emulate a wrap-around in memory as if it was circular.
 
-### Maps:
+### Hash:
 
-- [ ] **csds_hash.h** (Hash Table)
+- [ ] **csds_hmap.h** (Hash Map)
   - Used to store key-value pairs and do fast lookups.
 
-### Trees:
+- [ ] **csds_hset** (Hash Set)
+  - Used to store a collection of unique values
+
+### Tree:
 
 - [ ] **csds_treemap.h** (Balanced Binary Search Tree)
   - Red-black tree that supports insertion, deletion and look-up in O(logN) time.

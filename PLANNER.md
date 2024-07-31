@@ -1,24 +1,17 @@
 TODO
 
-* csds_list.h
+NOTE: Some structures will only be done when the need arises.
 
-* csds_rbuf.h
-
-* csds_hash.h
-
-* csds_treemap.h (look at linux rbtree for inspiration)
-
-* csds_bheap.h
-
-* csds_leakcheck.h (simplify everything. get something to work first. prob easier to just use valgrind)
-
-* csds_regex.h
-
-* csds_cachemiss.h (how do we even begin this)
-
-* Look at Arc from Rust, unique ptr from C++. Try something similar for fun
-
-* csds_defer.h (when need arises, doesn't seem fun to implement)
+- [x] csds_vec.h
+    - [ ] fix memory leak when it grows
+- [ ] csds_list.h
+- [ ] csds_rbuf.h
+- [ ] csds_hmap.h
+- [ ] csds_hset.h
+- [ ] csds_treemap.h (linux rbtree based)
+- [ ] csds_bheap.h
+- [ ] csds_regex.h
+- [ ] Doxygen Documentation
 
 ---
 
@@ -45,6 +38,8 @@ LEARNING RESOURCES
 * https://codeplea.com/minctest
 
 * https://github.com/nothings/stb
+    * not a big fan of single header libraries, but it has some
+      really good ideas
 
 ---
 
