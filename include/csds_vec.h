@@ -6,6 +6,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef CSDS_ERROR_H
+#define CSDS_ERROR_VEC_HEADER_NULL	-11
+#define CSDS_ERROR_VEC_ARR_NULL		-12
+#define CSDS_ERROR_VEC_MALLOC_FAILED	-13
+#define CSDS_ERROR_VEC_REALLOC_FAILED	-14
+#define CSDS_ERROR_VEC_OUT_OF_BOUNDS	-15
+#define CSDS_ERROR_VEC_EMPTY		-16
+#endif /* !CSDS_ERROR_H */
+
 #ifndef CSDS_VEC_INITIAL_CAP
 #define CSDS_VEC_INITIAL_CAP	16
 #endif /* !CSDS_VEC_INITIAL_CAP */
